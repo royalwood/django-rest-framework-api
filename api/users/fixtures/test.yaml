@@ -1,0 +1,145 @@
+# User
+- model: users.user
+  pk: 1
+  fields:
+    uni: 1
+    campus: 1
+    school: 1
+    course: 1
+    groups: [2] # Student
+    name: Student
+    password: pbkdf2_sha256$20000$SKBwLJNR1fDD$uWXO1nIzqI3JrOGphzUTObe8ihD4Cf8F3sO3f/SNCEM= # ucroo123
+    email: student@ucroo.com
+    gender: male
+    first_name: Student
+    last_name: Ucroo
+    profile_pic: http://aday.kyrenia.edu.tr/wp-content/uploads/2016/08/60c403f7.jpg
+
+- model: users.User
+  pk: 2
+  fields:
+    uni: 1
+    campus: 1
+    school: 1
+    course: 1
+    groups: [1] # Admin
+    name: Admin
+    password: pbkdf2_sha256$20000$SKBwLJNR1fDD$uWXO1nIzqI3JrOGphzUTObe8ihD4Cf8F3sO3f/SNCEM=
+    email: admin@ucroo.com
+    gender: male
+    first_name: Admin
+    last_name: Ucroo
+    is_staff: true
+    is_admin: true
+    is_superuser: true
+    profile_pic: http://i.huffpost.com/gen/3431342/images/o-STUDENT-facebook.jpg
+
+- model: users.user
+  pk: 3
+  fields:
+    uni: 1
+    campus: 1
+    school: 1
+    course: 1
+    groups: [3]
+    name: Academic
+    password: pbkdf2_sha256$20000$SKBwLJNR1fDD$uWXO1nIzqI3JrOGphzUTObe8ihD4Cf8F3sO3f/SNCEM=
+    email: academic@ucroo.com
+    gender: male
+    first_name: Academic
+    last_name: Ucroo
+    profile_pic: http://www.simpletuition.com/wp-content/uploads/2013/09/Student-preparing-for-exam.jpg
+
+- model: users.user
+  pk: 4
+  fields:
+    uni: 1
+    campus: 1
+    school: 1
+    course: 1
+    groups: [4] # Staff
+    name: Staff
+    password: pbkdf2_sha256$20000$SKBwLJNR1fDD$uWXO1nIzqI3JrOGphzUTObe8ihD4Cf8F3sO3f/SNCEM=
+    email: staff@ucroo.com
+    gender: male
+    first_name: Staff
+    last_name: Ucroo
+    profile_pic: http://depts.washington.edu/psychres/img/careers/teaching.jpg
+
+- model: users.user
+  pk: 5
+  fields:
+    uni: 1
+    campus: 1
+    school: 1
+    course: 1
+    groups: [5] # Uni Admin
+    name: Uni Admin
+    password: pbkdf2_sha256$20000$SKBwLJNR1fDD$uWXO1nIzqI3JrOGphzUTObe8ihD4Cf8F3sO3f/SNCEM=
+    email: uniadmin@ucroo.com
+    gender: male
+    first_name: Uniadmin
+    last_name: Ucroo
+    profile_pic: http://smithrivas.com/wp-content/uploads/2014/02/WomanAtCollege.jpg
+
+- model: users.user
+  pk: 6
+  fields:
+    uni: 1
+    campus: 1
+    school: 1
+    course: 1
+    groups: [2] # Student
+    name: Friend
+    password: pbkdf2_sha256$20000$SKBwLJNR1fDD$uWXO1nIzqI3JrOGphzUTObe8ihD4Cf8F3sO3f/SNCEM=
+    email: friend@ucroo.com
+    gender: female
+    first_name: Friend
+    last_name: Ucroo
+    profile_pic: http://il9.picdn.net/shutterstock/videos/5663834/thumb/1.jpg
+
+
+- model: users.user
+  pk: 7
+  fields:
+    uni: 1
+    campus: 1
+    school: 1
+    course: 1
+    school: 1
+    course: 1
+    groups: [2] # Student
+    name: Blocked Friend
+    password: pbkdf2_sha256$20000$SKBwLJNR1fDD$uWXO1nIzqI3JrOGphzUTObe8ihD4Cf8F3sO3f/SNCEM=
+    email: blocked@ucroo.com
+    gender: female
+    first_name: Blocked Friend
+    last_name: Ucroo
+
+- model: users.connection
+  pk: 1
+  fields:
+    from_user: 1 # Student
+    to_user: 6 # Friend
+    status: 'accepted'
+
+- model: users.connection
+  pk: 2
+  fields:
+    from_user: 6 # Friend
+    to_user: 1 # Student
+    status: 'accepted'
+
+- model: users.connection
+  pk: 3
+  fields:
+    from_user: 7 # Student
+    to_user: 1 # Blocked Friend
+    status: 'requested'
+
+- model: users.connection
+  pk: 3
+  fields:
+    from_user: 1 # Student
+    to_user: 7 # Blocked Friend
+    status: 'blocked'

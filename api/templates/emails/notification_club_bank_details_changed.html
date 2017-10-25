@@ -1,0 +1,29 @@
+<?php 
+$club = repo('Club')->findOneBy(array('id'=>$notification->get_entity_id()));
+?>
+
+<?php if (isset($is_menu)) { ?>
+<div onclick="location.href='<?=base_url()?>club/<?=$club->getId()?>'">
+<? } ?>
+    
+<?php 
+$iconClass = 'post-icon';
+$detailsClass = 'post-details';
+if (isset($is_menu)) { 
+  $iconClass = 'msg-icon';
+  $detailsClass = 'msg-details';
+}
+?>
+<div class="<?=$detailsClass?>">
+  <?php if (!isset($is_menu)) { ?>
+  <div class="float-right icon-delete"><a href="<?=base_url()?>notification/delete/<?=$notification->get_id()?>" title="delete">&nbsp;</a></div>
+  <? } ?>
+
+	<span>
+  		<?php echo anchor(base_url() .'club/'.$club->getId().prepare_que_str_mobile($notification), $club->getName() . ' (' . $club->getShort_name() . ')');?>: Bank details changed
+	</span>
+</div>
+
+<?php if (isset($is_menu)) { ?>
+</div>
+<? } ?>

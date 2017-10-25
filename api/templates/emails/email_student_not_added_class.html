@@ -1,0 +1,31 @@
+<p>Hi <?php echo $name;?>,</p>
+<p>We noticed that you haven't added your classes yet this semester.</p>
+<p>Here are some of the reasons to take advantage of Class Groups:</p>
+<ul>
+    <li>You can ask questions from your mobile via our iOS and Android apps</li>
+    <li>You can answer questions from your email - these will automatically post to the class group</li>
+    <li>You can get to know your classmates by checking out their profiles</li>
+    <li>You can post questions, links, files and polls</li>
+    <li>You will receive assessment reminders</li>
+</ul>
+<p><a style="background-color: #005393;
+	background-repeat: no-repeat;
+	font-weight: bold;
+	font-size: 11px;
+	color: #FFF;
+	display: inline-block;
+	text-decoration: none;
+	border: 1px solid #bababa;
+	border-bottom: 1px solid #a5a5a5;
+	padding: 0 7px;
+	line-height: 2.363636364;
+	cursor: pointer;
+	position: relative;
+	text-shadow: 0 1px 0 #ffffff;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+	text-align: center;
+
+	white-space:nowrap;" href="<?= base_url() ?>timetable/edit">Add Classes</a></p>
+<p><a href="<?= base_url().prepare_que_str_mobile(array('Login',0)) ?>">Sign in to UCROO</a></p>
+<span style="font-size:10px;color:#999;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;"><a style="color:#538dc2" href="<?= base_url() ?>user/unsubscribe/<?=$cron_type?>/<?=$user_id?>" target="_blank">Click here</a> to Unsubscribe</span>
+<p>Have a great day!</p>

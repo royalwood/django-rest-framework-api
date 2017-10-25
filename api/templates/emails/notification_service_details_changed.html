@@ -1,0 +1,6 @@
+<?php
+$service = repo('Services')->findOneBy(array('id' => $notification->get_entity_id()));
+?>
+<span>
+<?php echo anchor(base_url() . 'service_pages/feed/' . $service->getId().prepare_que_str_mobile(array('ServicePageInfo',$service->getId())), $service->getName()); ?>: Service Pages details changed
+</span>

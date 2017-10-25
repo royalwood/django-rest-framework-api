@@ -1,0 +1,30 @@
+	<p>The following ACADEMIC has been added to UCROO.</p>
+	
+	<h3>Unit:</h3>
+	
+		<div class="therating">
+		
+			<table width="100%">
+				<tr>
+					<td colspan="3" align=left>
+							<div class="col1"> 
+								<div class="rating_pad">
+									<div class="rdtop">
+										<div class=""><b><?=$academic->getFullname();?></b> - <?=$academic->getFaculty()->getName(); ?> - <?=$academic->getFaculty()->getUni()->getName(); ?></div>
+										<div class="value"></div>
+										<div class="clear"></div>
+									</div>
+									
+								</div>
+							</div> 								
+					</td>
+				</tr>
+			</table>
+		</div>
+	<?if($user != NULL):?>
+		<hr>
+		<h3>User Details (adder):</h3>
+		<p>Userid: <?=$user->getId()?></p>
+		<p>User's Name: <?=$user->getUsername()?></p>
+		<p>User's Email: <?=$user->getEmail()?></p>
+	<?endif;?>

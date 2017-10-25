@@ -1,0 +1,55 @@
+<?php 
+$member_id = $notification->get_entity_id();
+$member = em()->getRepository('models\Club_members')->findOneById($member_id);
+
+$club = $member->getClub();
+$user = NULL;
+$is_ucroo = TRUE;
+$user_id = $member->getUser_id();
+
+if(!empty($user_id)) {
+  $user = $member->getUser();
+} else if(empty($user_id)) {
+  $is_ucroo = FALSE;
+  $user = $member->getNon_ucroo_member();
+} else {
+  return '<span class="msg_subtitle">Error: Member does\'t exist</span>';
+}
+
+$name = '';
+if($is_ucroo && $user->getId() === get_userid())
+  $name = 'You';
+else if($is_ucroo)
+  $name = anchor('user/profile/'.$user->getId(), get_name($user->getId()));
+else 
+  $name = $user->getFirst_name() . ' ' . $user->getLast_name();
+?>
+
+<?php if (isset($is_menu)) { ?>
+<div onclick="location.href='<?=base_url()?>club/<?=$club->getId()?>'">
+<? } ?>
+
+<?php 
+$iconClass = 'post-icon';
+$detailsClass = 'post-details';
+if (isset($is_menu)) { 
+  $iconClass = 'msg-icon';
+  $detailsClass = 'msg-details';
+}
+?>
+
+<div class="<?=$detailsClass?>">
+  <?php if (!isset($is_menu)) { ?>
+  <div class="float-right icon-delete"><a href="<?=base_url()?>notification/delete/<?=$notification->get_id()?>" title="delete">&nbsp;</a></div>
+  <? } ?>
+  <?php if($is_ucroo):?>
+    <span class="user-name"><?= anchor('user/profile/'.$user->getId().prepare_que_str_mobile('UserInfo',$user->getId()), $name) ?></span>
+  <?php else:?>
+    <span class="user-name"><?=$name?></span>
+  <?php endif;?>
+   joined <?= anchor('club/'.$club->getId().prepare_que_str_mobile('ClubInfo',$club->getId()), $club->getName() . ' (' . $club->getShort_name() . ')')?>
+</div>
+
+<?php if (isset($is_menu)) { ?>
+</div>
+<? } ?>

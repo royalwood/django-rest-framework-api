@@ -1,0 +1,20 @@
+<?php 
+  $club_event = repo($notification->get_entity_type())->findOneBy(array('id'=>$notification->get_entity_id()));
+?>
+    
+<p>
+    <?php echo $club_event->getClub()->getName();?> has listed a new event - <?php echo anchor(base_url() .'club/event_view/'.$club_event->getId(), $club_event->getTitle());?>
+</p>
+
+<br>
+  <p class="time_duration">
+    <?=$club_event->getStart_date()->format('l, F j, o g:i A');?> to
+    <?=$club_event->getEnd_date()->format('g:i A');?><br>
+  </p>
+  <p><b>Where:</b> <?=$club_event->getLocation()?></p>
+  <p><b>Type:</b> <?=humanize($club_event->getType())?></p>
+  <p><b>Details:</b> <?=$club_event->getDescription();?></p>
+
+  <?php echo anchor(base_url() .'club/event_view/'.$club_event->getId().prepare_que_str_mobile($notification), 'View all the details here');?>
+
+  <br><br>

@@ -1,0 +1,10 @@
+-r base.txt
+
+# Use git version of drfdocs because the current release doesn't show
+# ModelViewSet http method names. Use my fork which has some tweaks.
+git+git://github.com/bcb/django-rest-framework-docs.git@master
+# Markdown for nice docstrings in drfdocs
+markdown
+# Pyyaml is used for loading yaml fixtures
+pyyaml
+sphinx_rtd_theme

@@ -1,0 +1,130 @@
+<h1>New academic / staff sign up</h1>
+
+<p><?=$user->getUsername()?>,</p>
+
+
+<table>
+<?$user_info = doctrine_to_str($user);?>
+<?php 
+unset($user_info['Finished: ']);
+unset($user_info['User: ']);
+unset($user_info['Password: ']);
+unset($user_info['Meta: ']);
+unset($user_info['Extracurricular: ']);
+?>
+<?foreach($user_info as $key=>$val):?>
+<?php 
+if($key == 'Group: '){
+  if(is_object($user->getGroup())){
+    $val = $user->getGroup()->getName();  
+  }else{
+    $val = "";
+  }
+}else if($key == 'Campus: '){
+  if(is_object($user->getCampus())){
+    $val = $user->getCampus()->getName();  
+  }
+  else{
+    $val = "";
+  }
+}
+else if($key == 'Uni: '){
+  $val = $user->getMeta()->getUni()->getName();
+}
+else if($key == 'Faculty: '){
+  if(is_object($user->getFaculty())){
+    $val = $user->getFaculty()->getName();  
+  }else{
+    $val = "";
+  }
+}
+else if($key == 'Course: '){
+  if(is_object($user->getCourse())){
+    $val = $user->getCourse()->getName();  
+  }else{
+    $val = "";
+  }
+  
+}
+else if($key == 'Incentive Actions: '){
+  $str_1 = "";
+  //22/09/15 - #5329 - Jaymit - Sign up: PHP Error in 'Staff Signup' email.
+  if(!empty($val)) {
+      $val_arr = json_decode($val);
+      if(!empty($val_arr) && is_array($val_arr)) {
+          foreach ($val_arr as $k => $v) {
+            if($v){$v = "Yes";}
+            $str_1.= $k." - ".$v."<br>";
+          }
+      }
+  }
+  $val = $str_1;
+}
+?>
+  <tr>
+    <td style="white-space:nowrap"><b><?=$key?></b></td>
+    <td style="width: 20px"></td>
+    <td><?=$val?></td>
+  </tr>
+
+<?endforeach?>
+</table>
+
+<hr>
+
+<table>
+<?$meta = doctrine_to_str($user->getMeta());?>
+<?php 
+unset($meta['User: ']);
+?>
+<?foreach($meta as $key=>$val):?>
+<?php 
+if($key == 'Uni: '){
+  $val = $user->getMeta()->getUni()->getName();
+}
+?>
+  <tr>
+    <td style="white-space:nowrap"><b><?=$key?></b></td>
+    <td style="width: 20px"></td>
+    <td><?=$val?></td>
+  </tr>
+
+<?endforeach?>
+</table>
+
+<hr>
+
+<table>
+<?$campus = doctrine_to_str($user->getCampus());?>
+<?foreach($campus as $key=>$val):?>
+<?php 
+if($key == 'Uni: '){
+  $val = $user->getMeta()->getUni()->getName();
+}
+?>
+  <tr>
+    <td style="white-space:nowrap"><b><?=$key?></b></td>
+    <td style="width: 20px"></td>
+    <td><?=$val?></td>
+  </tr>
+
+<?endforeach?>
+</table>
+
+
+<hr>
+
+<table>
+<?$uni = doctrine_to_str($user->getUni());?>
+<?php 
+unset($uni['Enrolledusers: ']);
+?>
+<?foreach($uni as $key=>$val):?>
+  <tr>
+    <td style="white-space:nowrap"><b><?=$key?></b></td>
+    <td style="width: 20px"></td>
+    <td><?=$val?></td>
+  </tr>
+
+<?endforeach?>
+</table>

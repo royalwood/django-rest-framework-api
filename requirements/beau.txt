@@ -1,0 +1,6 @@
+# My personal settings for development
+-r local.txt
+
+django-test-without-migrations
+httpie
+gnureadline

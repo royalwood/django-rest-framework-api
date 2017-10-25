@@ -1,0 +1,17 @@
+<? 
+
+/*
+ * Pretty much identical to views in the views/notification folder so go have a look ther
+ * 
+ */
+	$user = $notification->get_user_from();
+?>
+
+	<p>
+  You are now <?= anchor('connection'.prepare_que_str_mobile($notification), 'connected')?>  with
+	<?php if($user):?>
+		<?= anchor('user/profile/'.$user->getId().prepare_que_str_mobile($notification), $user->getUsername()) ?>
+	<?php else:?>
+		<span class=msg_subtitle>Inactive user
+	<?php endif;?>		
+<br><br>

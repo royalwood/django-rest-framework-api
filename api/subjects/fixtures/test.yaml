@@ -1,0 +1,23 @@
+- model: subjects.subject
+  pk: 1
+  fields:
+      user: 1
+      campus: 1
+      code: SD101
+      duration: 1
+      name: Software Development 101
+      time: 09:00
+      uni: 1
+      year: 2017
+
+- model: subjects.subject
+  pk: 2
+  fields:
+      user: 1
+      campus: 1
+      code: BUS101
+      duration: 1
+      name: Business 101
+      time: 09:00
+      uni: 1
+      year: 2018

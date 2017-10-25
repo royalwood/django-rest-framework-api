@@ -1,0 +1,36 @@
+<?php
+	// TODO put the em() function in general_helpers
+	$this->load->helper("notification_event_helper.php");
+	
+	$answer = em()->getRepository('models\Feed_answers')->find($notification->get_entity_id());
+	$question = $answer->getFeed_post();
+	
+	$possessive = 'the';
+	if(get_userid() == $answer->getUser_id())
+		$possessive = 'your';
+
+	$user_count = $answer->getNum_votes();
+	$student = plural_option("student", $user_count);
+	$have = ($user_count > 1) ? "have":"has";
+	$href = base_url().'feed_posts/view/'.$question->getId().prepare_que_str_mobile(array('FeedItem', $question->getId()));
+?>
+
+<?php if (isset($is_menu)) { ?>
+<div onclick="location.href='<?=$href?>'">
+<? } ?>
+
+<?php 
+$iconClass = 'post-icon';
+$detailsClass = 'post-details';
+if (isset($is_menu)) { 
+  $iconClass = 'msg-icon';
+  $detailsClass = 'msg-details';
+}
+?>
+
+
+<div class="<?=$detailsClass?>">
+  
+  <span><?= "$user_count $student $have <b>liked</b> $possessive answer - ". anchor($href, truncate_clean(ucfirst(strip_tags($answer->getAnswer())), 200))?></span>
+  
+</div>

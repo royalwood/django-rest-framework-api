@@ -1,0 +1,25 @@
+<?php
+	$href = base_url() . 'post/' .strtolower($entity->getFeed_Object()).'/'.$entity->getFeed_object_id().'/'. $notification->get_entity_id().prepare_que_str_mobile($notification);
+  $question_text = ($entity->getType() != 'link') ? ucfirst($entity->getContent()) : $entity->getContent();
+?>
+
+<p>
+	<? 
+
+	if($entity->getType() == 'link'){
+		echo ucfirst($question_text);
+	}else if ($entity->getType() == 'question') {
+            // 17-08-2015 - #5215 - Anuj - Do not cut off Text in email notification - the Question Post Type
+            echo truncate_text_email_content($question_text,strlen($question_text) + 1,$href);
+        } else{
+		echo truncate_text_email_content($question_text,150,$href);
+	}
+
+	?>
+</p>
+ <?php if($entity->getType() == 'question'){ ?>
+<p><br>Have a great day!</p>
+<br><p><b>You can respond to this question on UCROO simply by replying to this email (note: responses may take one hour to display)</b></p>
+<?php
+ }
+?>

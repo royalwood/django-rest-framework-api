@@ -1,0 +1,5 @@
+- model: core.category
+  pk: 1
+  fields:
+    name: Accomodation
+    module: marketplace

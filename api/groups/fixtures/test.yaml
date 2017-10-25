@@ -1,0 +1,84 @@
+# Club
+- model: groups.club
+  pk: 1
+  fields:
+    name: My Club
+    uni: 1
+    user: 1 # Student
+
+- model: groups.clubadmin
+  pk: 1
+  fields:
+    group: 1
+    user: 1 # Student
+
+- model: groups.clubmember
+  pk: 1
+  fields:
+    group: 1
+    user: 6 # Friend
+
+# Custom Group
+- model: groups.customgroup
+  pk: 1
+  fields:
+    name: My Custom Group
+    uni: 1
+    user: 1 # Student
+
+- model: groups.customgroupmember
+  pk: 1
+  fields:
+    group: 1
+    user: 1 # Student
+
+# Student Service
+- model: groups.studentservice
+  pk: 1
+  fields:
+    name: My Student Service
+    uni: 1
+    user: 1 # Student
+
+- model: groups.studentserviceadmin
+  pk: 1
+  fields:
+    group: 1
+    user: 1 # Student
+
+- model: groups.studentservicemember
+  pk: 1
+  fields:
+    group: 1
+    user: 6 # Friend
+
+# Study Group
+- model: groups.studygroup
+  pk: 1
+  fields:
+    name: My Study Group
+    uni: 1
+    user: 1 # Student
+    time_from: '00:00'
+    time_to: '11:59'
+    time_day: 1
+
+- model: groups.studygroupmember
+  pk: 1
+  fields:
+    group: 1
+    user: 1 # Student
+
+# Mentor Group
+- model: groups.mentorgroup
+  pk: 1
+  fields:
+    name: My Mentor Group
+    uni: 1
+    user: 1 # Student
+
+- model: groups.mentorgroupmember
+  pk: 1
+  fields:
+    group: 1
+    user: 1 # Student

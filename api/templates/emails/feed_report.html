@@ -1,0 +1,33 @@
+
+<html>
+<body>
+  <?php if($post->getFeed_object() == 'marketplace') { ?>
+    <p>The following item has been reported on the Marketplace.</p>
+    <h3>Copy of Item:</h3>
+  <?php } else { ?>
+    <p>The following post has been reported.</p>
+    <h3>Copy of Post:</h3>
+  <?php } ?>
+	
+	<?= $post_html?>
+
+	<hr>
+	<h3>User Details (poster):</h3>
+	<p>Userid: <?=$user->getId()?></p>
+	<p>User's Name: <?=$user_meta->getFirst_name() . " ". $user_meta->getLast_name()?></p>
+	<p>User's Email: <?=$user->getEmail()?></p>
+
+	<hr>
+	<h3>Post Details:</h3>
+	<p>Post ID: <?=$post->getId()?></p>
+  
+  <?php if($post->getFeed_object() == 'marketplace') { ?>
+    <p>Post URL: <a href="<?=  base_url().'marketplace/item/'.$post->getId()?>"><?=  base_url().'marketplace/item/'.$post->getId()?></a></p>
+  <?php } else { ?>
+    <p>Post URL: <a href="<?=  base_url().'feed_posts/view/'.$post->getId()?>"><?=  base_url().'feed_posts/view/'.$post->getId()?></a></p>
+  <?php } ?>
+	<p>Date Created: <?=$post->getDate_Created()->format(MYSQL_TIME)?></p>
+	<p>Date Modified: <?=$post->getDate_order()->format(MYSQL_TIME)?></p>
+	
+</body>
+</html>

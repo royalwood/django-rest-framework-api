@@ -1,0 +1,25 @@
+<?php
+$user = $notification->get_user_from();
+
+$classes = array();
+$displayed = array();
+
+$unit_enroled_id = $notification->get_entity_id();
+if (!in_array($unit_enroled_id, $displayed)) {
+  $unit_enroled = repo('Unit_enrolment_current')->findOneBy(array('id' => $unit_enroled_id));
+  $unit = repo('Unit')->findOneBy(array('id' => $unit_enroled->getUnit_id()));
+  $classes[] = anchor('subject-feed/' . $unit->getId().prepare_que_str_mobile(array('Unit',$unit->getId())), $unit->getCodeNameDashBold());
+  $displayed[] = $unit_enroled->getUnit_id();
+}
+
+$classes = implode_and($classes);
+?>
+
+
+  
+  <?php if ($user): ?>
+    <?
+    $unit = repo('Unit')->findOneBy(array('id' => $notification->get_entity_id()));
+    ?>
+    <span onclick="location.href='<?= base_url() ?>user/profile/<?= $user->getId() ?>/about'">You have been added to the <?= $classes ?> Group</span>
+  <?php endif; ?>

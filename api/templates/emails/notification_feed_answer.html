@@ -1,0 +1,14 @@
+<? 
+	
+		$answer = $entity;
+		$question = $answer->getFeed_post();
+		
+		$possessive = 'the';
+		if($notification->get_user_to_id() == $question->getUser_id())
+			$possessive = 'your';
+
+		$href = base_url().'feed_posts/view/'.$question->getId().prepare_que_str_mobile(array('FeedItem', $question->getId()));
+		
+?>
+
+	<p><?= "The following <b>answer</b> has been posted to $possessive ".$question->getType()." ". '"'. ucfirst($question->getQuestion()).'":<br><br> '. anchor($href, truncate_clean(ucfirst(strip_tags($answer->getAnswer())), 100))?></p>

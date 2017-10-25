@@ -1,0 +1,21 @@
+<? 
+	$assessment = repo('Calendar')->find($notification->get_entity_id());
+	$time = new DateTime('now');
+	$today = $time->format(MYSQL_DATE);
+?>
+
+	<p>	
+		<b><?=$assessment->getTitle()?></b> (<?=$assessment->getUnit()->getCode()?>) is due 
+		<?= $assessment->getAssessment_date()->format(MYSQL_DATE) == $today ? 'today' : 
+					'on the ' . $assessment->getAssessment_date()->format('dS M') ; ?>. 
+
+	<? if($assessment->getBy_academic()) { 
+	      if($assessment->getUser()->getGroup()->getId()==3)
+	        $txt = 'academic';
+	      else
+	        $txt = 'staff';
+
+	      echo 'Reminder set by '.$txt;
+
+    } ?>
+	</p>

@@ -1,0 +1,27 @@
+<?php
+$entity_id = $notification->get_entity_id();
+$study_group = em()->getRepository('models\Study_group')->find($entity_id);
+
+$user = $notification->get_user_from();
+
+if (empty($user)) {
+  return '<span class="msg_subtitle">Error: Member does\'t exist</span>';
+}
+
+$name = anchor('user/profile/' . $user->getId().'/about'.prepare_que_str_mobile(array('UserInfo', $user->getId())), get_name($user->getId()));
+?>
+
+<?php
+  $iconClass = 'post-icon';
+  $detailsClass = 'post-details';
+  if (isset($is_menu)) {
+    $iconClass = 'msg-icon';
+    $detailsClass = 'msg-details';
+  }
+?>
+<div class="<?=$detailsClass?>">
+  <span class=msg_subtitle><?= $name ?></span>
+  has joined
+  <?= anchor('study/' . $study_group->getId().'/feed'.prepare_que_str_mobile($notification), $study_group->getName()) ?>
+  Study Group
+</div>

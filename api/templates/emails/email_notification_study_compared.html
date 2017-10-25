@@ -1,0 +1,12 @@
+<p>
+		Hi <?=ucwords($to_username);?>,
+</p>
+<p>
+	<a href="<?php echo $from_username_link;?>"><?=ucwords($from_username);?></a> compared their hours studied this month against yours. Is your study timer up to date?
+</p>
+
+<br/>
+<p>
+<a href="<?=$yes_link.prepare_que_str_mobile(array('StudyTimer',0));?>" target="_blank" style="text-decoration: none; background:#6ab14c; color:#fff; -webkit-border-radius:5px; -moz-border-radius: 5px; border-radius:5px; padding:15px 45px;font-size:18px; font-family:Helvetica, Arial, sans-serif" class="button">Yes</a>
+<a href="<?=$no_link.prepare_que_str_mobile(array('StudyTimer',0));?>" target="_blank" style="text-decoration: none; background:#4f97e8; color:#fff; -webkit-border-radius:5px; -moz-border-radius: 5px; border-radius:5px; padding:15px 45px;font-size:18px; font-family:Helvetica, Arial, sans-serif" class="button">No</a>
+</p>

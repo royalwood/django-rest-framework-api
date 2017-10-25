@@ -1,0 +1,29 @@
+<? 
+	$rating = em()->getRepository('models\\'.$notification->get_entity_type())->find($notification->get_entity_id());
+	if($notification->get_entity_type() == 'Academic_rating')	{
+		$rated_id = $rating->getAcademic_id();
+		$rated_field = 'academic_id';
+	}
+	else if($notification->get_entity_type() == 'Unit_rating')	{
+		$rated_id = $rating->getUnit_id();
+		$rated_field = 'unit_id';
+	}
+	$rating = em()->getRepository('models\\'.$notification->get_entity_type())->find($notification->get_entity_id());
+	// FIXME post shuold have a getUser method	
+	if($rating)	{
+		if($notification->get_entity_type() == 'Academic_rating')	{
+			$href = base_url().'rating/academic_view/'.$rating->getAcademic_id();
+			$name_link = anchor($href,$rating->getAcademic()->getName());
+		}
+		else if($notification->get_entity_type() == 'Unit_rating')	{
+			$href = base_url().'rating/unit_view/'.$rating->getUnit_id();
+			$name_link = anchor($href,$rating->getUnit()->getCode());
+		}
+	}
+	else {
+		$name_link = "A unit ";
+	}
+	
+?>
+
+	<p><?= "$name_link has been rated by another student. ".anchor($href,"See what they think.")?></p>

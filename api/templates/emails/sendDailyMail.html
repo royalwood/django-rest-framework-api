@@ -1,0 +1,56 @@
+<html xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://ogp.me/ns#" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+<meta content="en" http-equiv="content-language">
+<title>daily schedule</title>
+<script src="<?= cdn_url('js/jquery/jquery-1.7.2.min.js')?>"></script>
+<script src="<?= cdn_url('js/jquery/jquery-ui-1.8.22.custom.min.js')?>"></script>
+</head>
+
+<body>
+    
+<script type="text/javascript">
+    
+var start = null;
+var end = null;
+    
+$(document).ready(function() {
+    start = new Date();
+    var users = <?php echo $users; ?>;
+    console.log(users);
+    for(i = 0; i < users.length; i++) {
+        sendMails(users[i], i);
+        console.log(users[i]);
+        
+    }
+});
+
+function sendMails(userId, count) {
+    $.ajax({
+      type: "POST",
+      url: "/dailyMail/send_group_schedules/",
+      data: {'ids' : userId},
+      async: false,
+      dataType: 'json',
+      cache: false,
+      error: function (xhr, ajaxOptions, thrownError) {
+          alert(xhr.status + " - " + thrownError);
+      }
+    })
+    .done(function(data) {
+        $('#showAll').append('<div>' + (count + 1) + '.</div>');
+        $('#showAll').append(data);
+        $('#showAll').append("<div>Sended: " + $("#showAll .sended").length + '</div>');
+        $('#showAll').append('------------------------------');
+        
+       
+
+        
+    });
+}
+</script>
+    
+    <div id="showAll"></div>
+    
+</body>
+</html> 

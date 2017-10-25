@@ -1,0 +1,45 @@
+<?php
+$member_id = $notification->get_entity_id();
+$member = em()->getRepository('models\Service_members')->findOneById($member_id);
+
+$service = $member->getService();
+$user = NULL;
+$is_ucroo = TRUE;
+$user_id = $member->getUser_id();
+
+if (!empty($user_id)) {
+  $user = $member->getUser();
+} else if (empty($user_id)) {
+  $is_ucroo = FALSE;
+  $user = $member->getNon_ucroo_member();
+  $user_type = 'non_ucroo';
+} else {
+  return '<span class="msg_subtitle">Error: Member does\'t exist</span>';
+}
+
+$name = '';
+if ($is_ucroo && $user->getId() == get_userid())
+  $name = 'You';
+else if ($is_ucroo)
+  $name = anchor('user/profile/' . $user->getId().prepare_que_str_mobile(array('UserInfo', $user->getId())), get_name($user->getId()));
+else
+  $name = $user->getFirst_name() != '' ? $user->getFirst_name() . ' ' . $user->getLast_name() : $user->getEmail();
+
+if (!isset($user_type)) {
+  $group_id = $user->getGroup_id();
+  $user_type = user_group_name($group_id);
+}
+?>
+
+
+
+  
+<?php if ($is_ucroo): ?>
+  <span class=msg_subtitle><?= anchor('user/profile/' . $user->getId().prepare_que_str_mobile(array('UserInfo', $user->getId())), $name) ?></span> 
+<?php else: ?>
+  <span class=msg_subtitle><?= $name ?></span> 
+<?php endif; ?>
+<?= $name == 'You' ? 'are following' : 'is following' ?>
+<?= anchor('service_pages/feed/' . $service->getId().prepare_que_str_mobile(array('ServicePageInfo', $service->getId())), $service->getName()) ?>
+
+

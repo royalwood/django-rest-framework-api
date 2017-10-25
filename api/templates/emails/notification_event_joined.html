@@ -1,0 +1,129 @@
+<?php
+if($notification->get_entity_type()=='Ucroo_event_member'){
+$member_id = $notification->get_entity_id();
+$member = em()->getRepository('models\Ucroo_event_member')->findOneById($member_id);
+
+$event = $member->getEvent();
+$user = NULL;
+$is_ucroo = TRUE;
+$user_id = $member->getUser_id();
+
+if (!empty($user_id)) {
+  $user = $member->getUser();
+}
+$module_name = strtolower($event->getModule_name());
+if($module_name=='ucroo_mentor'){
+  $module_name='mentors';
+}
+$name = '';
+if ($is_ucroo && $user->getId() === get_userid())
+  $name = 'You';
+else if ($is_ucroo)
+  $name = anchor('user/profile/' . $user->getId().prepare_que_str_mobile(array('UserInfo', $user->getId())), get_name($user->getId()));
+else
+  $name = $user->getFirst_name() . ' ' . $user->getLast_name();
+
+?>
+
+<?php if (isset($is_menu)) { ?>
+<div onclick="location.href = '<?= base_url() ?>event/view/<?php echo $module_name;?>/<?= $event->getId() ?>/<?= $event->getTitle() ?>'">
+<? } ?>
+
+<?php 
+$extra_txt = '';
+
+if($notification->get_entity_extra()!='university_event'){
+  $extra_txt = 'also';
+}
+$iconClass = 'post-icon';
+$detailsClass = 'post-details';
+if (isset($is_menu)) { 
+  $iconClass = 'msg-icon';
+  $detailsClass = 'msg-details';
+}
+?>
+<?php if ($is_ucroo): ?>
+  <div class="<?=$iconClass?>">
+    <a href="<?=base_url()?>user/profile/<?=$user->getId().prepare_que_str_mobile(array('UserInfo',$user->getId()))?>"><img src="<?=get_user_profile_pic($user->getId(), 'square') ?>" alt="User Profile"/></a>
+  </div>
+<?php endif;?>
+
+<div class="<?=$detailsClass?>">
+  <?php if ($is_ucroo): ?>
+    <span class="user-name"><?= anchor('user/profile/' . $user->getId().prepare_que_str_mobile(array('UserInfo',$user->getId())), $name) ?></span>
+  <?php endif; ?>
+    <?= 'is '.$extra_txt.' going to ' ?>
+    <?= anchor('event/view/'.$module_name.'/'.$event->getId().prepare_que_str_mobile(array('Ucroo_event', $event->getId())), $event->getTitle()) ?>
+
+ 
+</div>
+
+<?php if (isset($is_menu)) { ?>
+</div>
+<? } ?>
+
+<?php } ?>
+
+
+<?php
+
+//For Service Events
+if($notification->get_entity_type()=='Service_event_member'){
+$member_id = $notification->get_entity_id();
+$member = em()->getRepository('models\Service_event_member')->findOneById($member_id);
+
+$event = $member->getEvent();
+$user = NULL;
+$is_ucroo = TRUE;
+$user_id = $member->getUser_id();
+
+if (!empty($user_id)) {
+  $user = $member->getUser();
+}
+
+$name = '';
+if ($is_ucroo && $user->getId() === get_userid())
+  $name = 'You';
+else if ($is_ucroo)
+  $name = anchor('user/profile/' . $user->getId(), get_name($user->getId()));
+else
+  $name = $user->getFirst_name() . ' ' . $user->getLast_name();
+
+?>
+
+<?php if (isset($is_menu)) { ?>
+<div onclick="location.href = '<?= base_url() ?>service_pages/event_view/<?= $event->getId() ?>/<?= $event->getTitle() ?>'">
+<? } ?>
+
+<?php 
+$iconClass = 'post-icon';
+$detailsClass = 'post-details';
+if (isset($is_menu)) { 
+  $iconClass = 'msg-icon';
+  $detailsClass = 'msg-details';
+}
+?>
+<?php if ($is_ucroo): ?>
+  <div class="<?=$iconClass?>">
+    <a href="<?=base_url()?>user/profile/<?=$user->getId().prepare_que_str_mobile(array('UserInfo',$user->getId()))?>"><img src="<?=get_user_profile_pic($user->getId(), 'square') ?>" alt="User Profile"/></a>
+  </div>
+<?php endif;?>
+
+<div class="<?=$detailsClass?>">
+  <?php if (!isset($is_menu)) { ?>
+  <div class="float-right icon-delete"><a href="<?=base_url()?>notification/delete/<?=$notification->get_id()?>" title="delete"><div class="only-web-hidden">Delete</div></a></div>
+  <? } ?>
+  
+  <?php if ($is_ucroo): ?>
+    <span class="user-name"><?= anchor('user/profile/' . $user->getId().prepare_que_str_mobile(array('UserInfo',$user->getId())), $name) ?></span>
+  <?php endif; ?>
+    <?= 'is also going to ' ?>
+    <?= anchor('service_pages/event_view/'.$event->getId().prepare_que_str_mobile(array('Service_event',$event->getId())), $event->getTitle()) ?>
+
+</div>
+
+<?php if (isset($is_menu)) { ?>
+</div>
+<? } ?>
+
+<?php } ?>

@@ -1,0 +1,14 @@
+<? 
+	
+		$answer = $entity;
+		$question = $answer->getUnit_question();
+		
+		$possessive = 'the';
+		if($notification->get_user_to_id() == $question->getUser_id())
+			$possessive = 'your';
+
+		$href = base_url().'question/view/'.$question->getId().prepare_que_str_mobile($notification);
+		
+?>
+
+	<p><?= "The following <b>answer</b> has been posted to $possessive question ". '"'. ucfirst($question->getQuestion()).'":<br><br> '. truncate_clean(anchor($href, ucfirst(strip_tags($answer->getAnswer()))), 100)?></p>

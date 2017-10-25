@@ -1,0 +1,6 @@
+<?php //$user = $notification->get_user_from() ?>
+<?php if($notification->get_user_from()->getId() > 0):?>
+<span class="user-name"><?= anchor('user/profile/'.$notification->get_user_from()->getId().prepare_que_str_mobile(array('UserInfo', $notification->get_user_from()->getId())), get_name($notification->get_user_from()->getId())) ?></span>
+<?php else:?>
+<span class="user-name">Inactive user</span>
+<?php endif;?> has joined UCROO

@@ -1,0 +1,10 @@
+<?php 
+  $club_event = repo($notification->get_entity_type())->findOneBy(array('id'=>$notification->get_entity_id()));
+  $club = $club_event->getClub();
+?>
+
+	<span>
+	  <?php echo anchor(base_url() .'club/'.$club->getId().prepare_que_str_mobile(array('ClubInfo',$club->getId())), $club->getName() . ' (' . $club->getShort_name() . ')');?>: 
+	  New ticket created for event - 
+	  <?php echo anchor(base_url() .'club/event_view/'.$club_event->getId().prepare_que_str_mobile($notification), $club_event->getTitle());?>
+	</span>

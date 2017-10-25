@@ -1,0 +1,8 @@
+<p>Hi <?php echo $name;?>,</p>
+<p>You have <?php echo $count;?> unread notifications on UCROO. Make sure you are not missing any important news:
+<a href="<?php echo base_url()."notification";?>">Click here to check your notifications</a>
+</p>
+
+<p><a href="<?= base_url().prepare_que_str_mobile(array('Login',0)) ?>">Sign in to UCROO</a></p>
+<span style="font-size:10px;color:#999;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;"><a style="color:#538dc2" href="<?= base_url() ?>user/unsubscribe/<?=$cron_type?>/<?=$user_id?>" target="_blank">Click here</a> to Unsubscribe</span>
+<p>Kind regards</p>

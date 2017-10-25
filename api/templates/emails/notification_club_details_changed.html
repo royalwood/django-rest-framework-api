@@ -1,0 +1,8 @@
+<?php 
+$club = repo('Club')->findOneBy(array('id'=>$notification->get_entity_id()));
+?>
+<span>
+  <?php echo anchor(base_url() .'club/'.$club->getId().prepare_que_str_mobile($notification), $club->getName() . ' (' . $club->getShort_name() . ')');?>: Club details changed
+</span>
+
+

@@ -1,0 +1,56 @@
+<p>Thank you for creating a Club Page on UCROO!</p>
+
+<?php if($club->getUni()->getId() != 6){?>
+<p>Having a Club Page on UCROO means:</p>
+<?php }?>
+
+<?php 
+/*
+ * #3640 CSU - Removing the text ' and buy tickets to their events' - Kaushal
+ */
+if($club->getUni()->getId() != 6){
+?>	
+<ul>
+	<li>Students can join the <?=$short_name?> any time, all year-round </li>
+	<li>Membership renewal each year is quick and easy</li>
+	<li>Students can buy tickets to <?=$short_name?> events online</li>
+	<li>Communication with members is improved</li>
+	<li>Time and money is saved on membership cards and bulk SMS</li>
+	<li>Your administration and reporting requirements are taken care of</li>
+	<li>Your position just became a whole lot easier!</li>
+</ul>
+
+<p>Being the Club Page creator allows you to:</p>
+	
+<ul>
+	<li>Edit the <?=$short_name?> Club Page</li>
+	<li>Create and manage ticketed events</li>
+	<li>Download aggregated revenue reports</li>
+	<li>Manage the <?=$short_name?>'s bank account details</li>
+</ul>
+<?php } else { ?>
+<!-- <ul>
+	<li>Communication with members is improved</li>
+	<li>Time and money is saved on bulk SMS</li>
+	<li>Your administration and reporting requirements are taken care of</li>
+	<li>Your position just became a whole lot easier!</li>
+</ul>
+
+<p>Being the Club Page creator allows you to:</p>
+	
+<ul>
+	<li>Edit the <?=$short_name?> Club Page</li>
+	<li>Download aggregated revenue reports</li>
+	<li>Manage the <?=$short_name?>'s bank account details</li>
+</ul> -->
+<?php } ?>
+
+<p>To make sure everything runs smoothly, we have created a dedicated support section for Club Pages. If you want a quick answer to your questions then visit: 
+<?php if($club->getUni()->getId() != 6){?>
+<a href="https://ucroo.zendesk.com/hc/en-us/categories/200359025-Clubs-Societies">support.ucroo.com.au/clubs</a> 
+<?php }else{?>
+<a href="http://support.ucroo.com.au">support.ucroo.com.au</a> 
+<?php }?>
+</p>
+
+<p>Thanks again!</p>

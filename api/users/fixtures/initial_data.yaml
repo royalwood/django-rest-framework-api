@@ -1,0 +1,164 @@
+# Add a content_type for miscellaneous global permissions
+- model: contenttypes.ContentType
+  fields:
+    app_label: core
+    model: global
+
+
+# Permissions
+# Viewing the "Uni Admin" panel
+- model: auth.Permission
+  fields:
+    name: Can view Uni Admin
+    content_type: [core, global]
+    codename: can_view_uni_admin
+
+# Adding assessments (done by academics)
+- model: auth.Permission
+  fields:
+    name: Can add Assessments
+    content_type: [studentcalendar, calendar]
+    codename: can_add_assessments
+
+# Viewing the All Staff feed - basically everyone except students can
+- model: auth.Permission
+  fields:
+    name: Can view All Staff
+    content_type: [feeds, post]
+    codename: can_view_all_staff
+
+# Viewing the All Staff feed - basically everyone except students can
+- model: auth.Permission
+  fields:
+    name: Can view All Staff
+    content_type: [feeds, post]
+    codename: can_view_all_staff
+
+# Creating a poll - Seems everyone who can post, can also post a poll, so
+# probably don't need this but let's leave it anyway.
+- model: auth.Permission
+  fields:
+    name: Can create polls
+    content_type: [feeds, post]
+    codename: can_create_polls
+
+# Attach file - As above, seems everyone who can post can also attach a file.
+# Probably don't need this but let's leave it.
+- model: auth.Permission
+  fields:
+    content_type: [feeds, post]
+    codename: can_attach_files
+
+# Targetting posts
+- model: auth.Permission
+  fields:
+    name: Can target posts
+    content_type: [feeds, post]
+    codename: can_target_posts
+
+# Creating events in All Students
+- model: auth.Permission
+  fields:
+    name: Can create events in All Students group
+    content_type: [feeds, post]
+    codename: can_create_all_students_events
+
+# Pin Posts
+- model: auth.Permission
+  fields:
+    name: Can pin posts in All Students
+    content_type: [feeds, post]
+    codename: can_pin_all_students_posts
+
+# Scheduling posts
+- model: auth.Permission
+  fields:
+    name: Can schedule posts in All Students
+    content_type: [feeds, post]
+    codename: can_schedule_all_students_posts
+
+# "Group" stuff - add these once we've fixed the groups
+#- model: auth.Permission
+#  pk: 2
+#  fields:
+#    name: Can add Student Services
+#    content_type: [groups, student_service]
+#    codename: add
+#
+#- model: auth.Permission
+#  pk: 3
+#  fields:
+#    name: Can change Subject Group
+#    content_type: [groups, subject_group]
+#    codename: change
+#
+#- model: auth.Permission
+#  pk: 4
+#  fields:
+#    name: Can view analytics
+#    content_type: [groups, subject_group]
+#    codename: can_view_analytics
+
+
+# User Groups
+# Admin - no need for this group any more. Don't use it!
+- model: auth.group
+  pk: 1
+  fields:
+    name: Admin
+    # Don't give this group permissions. Don't use this group at all.
+
+# Uni Student
+- model: auth.group
+  pk: 2
+  fields:
+    name: Student
+    permissions:
+      - [can_attach_files, feeds, post]
+      - [can_create_polls, feeds, post]
+      - [can_schedule_all_students_posts, feeds, post]
+      - [can_target_posts, feeds, post]
+
+# Uni Academic
+- model: auth.group
+  pk: 3
+  fields:
+    name: Academic
+    permissions:
+      - [can_add_assessments, studentcalendar, calendar]
+      - [can_attach_files, feeds, post]
+      - [can_create_polls, feeds, post]
+      - [can_view_all_staff, feeds, post]
+      - [can_target_posts, feeds, post]
+      - [can_create_all_students_events, feeds, post]
+      - [can_pin_all_students_posts, feeds, post]
+      - [can_schedule_all_students_posts, feeds, post]
+
+# Uni Staff
+- model: auth.group
+  pk: 4
+  fields:
+    name: Staff
+    permissions:
+      - [can_attach_files, feeds, post]
+      - [can_create_polls, feeds, post]
+      - [can_view_all_staff, feeds, post]
+      - [can_target_posts, feeds, post]
+      - [can_create_all_students_events, feeds, post]
+      - [can_pin_all_students_posts, feeds, post]
+      - [can_schedule_all_students_posts, feeds, post]
+
+# Uni Admin
+- model: auth.group
+  pk: 5
+  fields:
+    name: Uni Admin
+    permissions:
+      - [can_attach_files, feeds, post]
+      - [can_create_polls, feeds, post]
+      - [can_view_all_staff, feeds, post]
+      - [can_view_uni_admin, core, global]
+      - [can_target_posts, feeds, post]
+      - [can_create_all_students_events, feeds, post]
+      - [can_pin_all_students_posts, feeds, post]
+      - [can_schedule_all_students_posts, feeds, post]

@@ -1,0 +1,77 @@
+<?php
+
+/*
+ * Pretty much identical to views in the views/notification folder so go have a look ther
+ * 
+ */
+
+		// TODO put the em() function in general_helpers
+	$this->load->helper("notification_event_helper.php");
+	$ent_type = $notification->get_entity_type();
+	$ent_id = $notification->get_entity_id();
+	$ent_extra = $notification->get_entity_extra();
+	$feed_post = em()->getRepository("models\\$ent_type")->find($notification->get_entity_id());
+	// FIXME post shuold have a getUser method	
+	if($feed_post)	{
+		$post_owner = em()->getRepository('models\Users')->find($feed_post->getUser_id())->getId();
+		$post_type = 'ANSWER';
+		$question = '';
+		if ($ent_type == 'Feed_answers')
+		{
+			$question_entity = $feed_post->getFeed_post();
+			$question = $feed_post->getAnswer();
+			$object = $question_entity->getFeedObject();
+			$ent_id = $feed_post->getFeed_post_id();
+		}
+		elseif ($ent_type == 'Feed_posts')
+		{
+			$question = $feed_post->getQuestion();
+			$object = $feed_post->getFeedObject();
+			$post_type = strtoupper($feed_post->getType());
+		}
+		
+		$words = explode(' ', $question);
+		$description = '';
+		if(sizeof($words) > 0)
+			$description .= $words[0];
+		if(sizeof($words) > 1)
+			$description .= ' '.$words[1];
+		if(sizeof($words) > 2)	
+			$description .= ' '.$words[2];
+		if(sizeof($words) > 3)
+			$description .= ' ...';
+		$description .= '';
+		
+	}
+	else	{
+		$post_owner = '';
+		$post_type = 'post';
+		$description = '';
+	}
+	
+  if($post_type == 'SELLING_ITEM'){
+    $href = base_url().'marketplace/item/'.$ent_id;
+    $post_type = "Marketplace Item";
+  } else  
+    $href = base_url().'feed_posts/view/'.$ent_id.prepare_que_str_mobile($notification);
+  
+	$post_link = anchor($href, $post_type);
+	
+	if($notification->get_user_to()->getId() == $post_owner) {
+		$message = " commented on your" ;
+		$postscript = "";
+	} else{
+		$message = " also commented on a";
+		$postscript = "that you commented on";
+	}
+	
+?>
+	<p>
+		<span>
+			<?= "A student has $message $post_link $postscript"?>
+		</span>
+		<span class="post-description"> - "<?=clickable_link_shorten($description)?>"</span><br />
+		Comment: <?=$ent_extra?></span>
+	</p>
+
+	<p><?=anchor($href, "View the post and comments")?></p>

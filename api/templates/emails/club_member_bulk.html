@@ -1,0 +1,58 @@
+  <p>Hi <?=$user?>!<br /><br />
+  Welcome to the <?=$club->getName();?> Page on UCROO!</p>
+  <p>
+      So you can take full advantage of your membership, the <?=$club->getShort_name();?> has teamed up with
+      UCROO &#8212; <?=$club->getUni()->getName();?>&#8217;s Private Social Network.
+  </p>
+  <p>Use UCROO to:</p>
+  <p>
+    <ul>
+      <li>Keep up to date with the latest <?=$club->getShort_name();?> news and events</li>
+      <?php 
+      /*
+       * #3640 CSU - Removing the text ' and buy tickets to their events' - Kaushal
+       */
+      if($club->getUni()->getId() != 6){
+      ?>
+      <li>Join or buy tickets to <?=$club->getShort_name();?> UCROO</li>
+      <?php } ?>
+      <li>Access helpful resources shared by <?=$club->getShort_name();?></li>
+    </ul>
+  </p>
+
+  <br /><b>What else can you do on UCROO?</b><br />
+
+  <p><b>Apart from being the one-stop-shop for <?=$club->getShort_name();?>, use UCROO to:</b></p>
+  <ul>
+    <?php 
+    /*
+     * #3640 CSU - Removing the text ' and buy tickets to their events' - Kaushal
+     */
+    if($club->getUni()->getId() != 6){
+    ?>
+    <li>Easily join other Clubs &amp; Societies at <?=$club->getUni()->getName();?> and buy tickets to their events</li>
+    <?php } ?>
+    
+    <li>Start a conversation with peers or ask them a question in the <?=$club->getUni()->getName();?> Feed</li>
+    <li>View fellow students university profiles</li>
+    <li>Share you calendar with friends and study partners to see who&#8217;s free between classes</li>
+    <li>See who else is taking your class and discuss coursework with them</li>
+    <li>Join or create a special interest group</li>
+    <li>Create study groups to work on assignments</li>
+    <li>Find a peer mentor</li>
+    <li>Follow student services for helpful hints and resources</li>
+    <li>Buy &amp; sell items in the student marketplace</li>
+  </ul>
+
+  <?php if ($user_type == 'non_ucroo'): ?>
+    <p>Or, finish creating your UCROO account below:</p>
+    <a href="<?= base_url() ?>auth/aaf">Create account</a>
+
+    <p>We look forward to seeing you on UCROO soon!</p>
+  <?php else: ?>
+    <p>Click the Sign In button below and check out the <?=$club->getShort_name();?> Page.</p>
+    <a href="<?= base_url().prepare_que_str_mobile(array('Login',0)) ?>">Sign In</a>
+  <?php endif ?>
+
+  <p>Happy connecting!</p>
+  <strong><?=$club->getName()?></strong><br />

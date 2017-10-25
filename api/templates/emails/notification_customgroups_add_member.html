@@ -1,0 +1,85 @@
+<?
+$this->load->helper("notification_event_helper.php");
+
+$customgroup = NULL;
+$entity_user = NULL;
+
+$entity = em()->getRepository('models\\' . $notification->get_entity_type())->findOneBy(array('id' => $notification->get_entity_id()));
+$customgroup = $entity->getCustomgroups();
+
+if ($entity->getUser() != NULL) {
+  $entity_user = $entity->getUser();
+  $user_type = 'user';
+} else {
+  $entity_user = $entity->getNon_ucroo_member();
+  $user_type = 'nonucroo';
+}
+
+//  $entity_user = $entity->getUser();
+
+if (NULL == $customgroup || NULL == $entity_user)
+  return '[Unknown Error]';
+
+if (!$customgroup)
+  echo 'no service page';
+
+if (!$entity_user)
+  echo 'no user';
+
+$user_id = $entity_user->getId();
+$customgroup_id = $customgroup->getId();
+
+$name = '';
+$self = FALSE;
+
+if ($user_type == 'user') {
+  if ($user_id != get_userid() && !isset($notification_mail_flag))
+    $name = anchor('user/profile/' . $entity_user->getId().'/about'.prepare_que_str_mobile(array('UserInfo',$entity_user->getId())), $entity_user->getUsername() . '{PLACEHOLDER}');
+  else {
+    $name = anchor('user/profile/' . $entity_user->getId().'/about'.prepare_que_str_mobile(array('UserInfo',$entity_user->getId())), 'You{PLACEHOLDER}');
+    $self = TRUE;
+  }
+} else {
+//#2637 yet to join things need to remove 08JAN2015
+//  if (!isset($notification_mail_flag)) {
+  //  $name = '<strong>' . $entity_user->getEmail() . '</strong> (Yet To Join UCROO)';
+  //} else {
+    //$name = 'You{PLACEHOLDER}';
+    //$self = TRUE;
+  //}
+}
+
+// $name.= prepare_que_str_mobile('UserInfo',$entity_user->getId());
+
+$type = FALSE;
+
+$message = '';
+if (strpos($notification->get_entity_extra(), 'admin') == TRUE || $notification->get_entity_extra() == 'admin'){
+  $type = 'an Group Administrator';
+  $message = $name . ' ' . ($self ? 'have' : 'has') . ' been added as ' . $type . ' to the group ';
+}else{
+  $type = 'a member';
+  $message = $name . ' ' . ($self ? 'have' : 'has') . ' been added as ' . $type . ' to the group ';
+}
+
+$message = str_replace("{PLACEHOLDER}", '', $message);
+?>
+
+<?php if (isset($is_menu)) { ?>
+<div onclick="location.href = '<?= base_url() ?>customgroup/<?= $customgroup_id ?>/feed'">
+<? } ?>
+
+<?php 
+$iconClass = 'post-icon';
+$detailsClass = 'post-details';
+if (isset($is_menu)) { 
+  $iconClass = 'msg-icon';
+  $detailsClass = 'msg-details';
+}
+?>
+<div class="<?=$detailsClass?>">
+  <span onclick="location.href = '<?= base_url() ?>customgroup/<?= $customgroup_id ?>/feed'" class="msg_subtitle">
+    <?= $message ?> <?php echo anchor(base_url() . 'customgroup/' . $customgroup_id.'/feed'.prepare_que_str_mobile($notification), $customgroup->getName()); ?>
+  </span>
+</div>
+

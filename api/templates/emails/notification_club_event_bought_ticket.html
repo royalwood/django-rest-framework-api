@@ -1,0 +1,10 @@
+<?php 
+  $event_ticket_sale = repo($notification->get_entity_type())->findOneBy(array('id'=>$notification->get_entity_id()));
+  $club_event = $event_ticket_sale->getEvent_ticket()->getEvent();
+  $club = $club_event->getClub();
+?>
+    
+<p>
+    You bought a ticket for the event 
+    <?php echo anchor(base_url() .'club/event_view/'.$club_event->getId().prepare_que_str_mobile(array('Club_event',$club_event->getId())), $club_event->getTitle());?>.
+    Here you can <a href="<?php echo $filename; ?>">download your ticket</a> as PDF file.</p>

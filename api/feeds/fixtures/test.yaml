@@ -1,0 +1,40 @@
+# Posts
+- model: feeds.post
+  pk: 1
+  fields:
+    feed_object: university
+    feed_object_id: 1
+    uni: 1
+    user: 1
+    body: >
+      Lorem ipsum dolor sit amet, viris aliquid ad ius, veri vulputate
+      definitiones per ea. Ex eius ullum eleifend nec, has detraxit democritum
+      ei, in quo erat philosophia. Ex appareat theophrastus vis. Per munere
+      postulant eu, id sea modo illum reprehendunt. Nam platonem expetenda
+      deseruisse et. Ea has alterum meliore.
+
+      Te eum vivendo probatus accusamus. Ei hinc solum sit, agam case augue per
+      eu, ridens regione propriae at has. Pro sint officiis ne, id ponderum
+      definiebas quaerendum nam. Ei usu dicat nullam, no eum ludus nihil iudico.
+      Sit cu tamquam blandit, cum id dicta meliore intellegat. Sed altera
+      sapientem ullamcorper ex, in cum vocent nostrud scribentur.
+
+      Inermis definiebas disputando qui eu, intellegat forensibus signiferumque
+      at pri, mel habemus commune signiferumque in. Audiam legimus vivendum nam
+      ad, et autem iusto impetus mei. Ut quo gubergren prodesset
+      conclusionemque. Legimus copiosae consetetur pri ex, ea dolor nostrum
+      neglegentur mea, senserit voluptatibus cu per. Te vel quas ludus
+      molestiae, eum an modus assum reformidans. Sea te pertinax prodesset, at
+      eam dolores volutpat principes, inermis senserit his ut.
+
+- model: feeds.comment
+  pk: 1
+  fields:
+    user: 6
+    post: 1
+    text: >
+      Nice post! Lorem ipsum dolor sit amet, viris aliquid ad ius, veri
+      vulputate definitiones per ea. Ex eius ullum eleifend nec, has detraxit
+      democritum ei, in quo erat philosophia. Ex appareat theophrastus vis. Per
+      munere postulant eu, id sea modo illum reprehendunt. Nam platonem
+      expetenda deseruisse et. Ea has alterum meliore.

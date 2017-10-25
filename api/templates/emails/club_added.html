@@ -1,0 +1,29 @@
+	<p>The following Club has been created.</p>
+	
+	<h3>Club:</h3>
+	
+		<div class="therating">
+		
+			<table width="100%">
+				<tr>
+					<td colspan="3" align=left>
+							<div class="col1"> 
+								<div class="rating_pad">
+									<div class="rdtop">
+										<div class=""><b><?=$club->getId();?></b> - <?=$club->getName();?> (<?=$club->getShort_name();?>)</div>
+										<div class="value"></div>
+										<div class="clear"></div>
+									</div>
+								</div>
+							</div> 								
+					</td>
+				</tr>
+			</table>
+		</div>
+		<?if($user != NULL):?>
+		<hr>
+		<h3>User Details (adder):</h3>
+		<p>Userid: <?=$user->getId()?></p>
+		<p>User's Name: <?=$user->getUsername()?></p>
+		<p>User's Email: <?=$user->getEmail()?></p>
+	<?endif;?>

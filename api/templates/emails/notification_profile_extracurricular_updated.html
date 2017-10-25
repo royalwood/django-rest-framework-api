@@ -1,0 +1,13 @@
+<?
+$user = repo('Users')->findOneBy(array('id'=>$notification->get_user_from_id()));
+?>
+<?= anchor('user/profile/'.$user->getId().prepare_que_str_mobile($notification), $user->getUsername()) ?> updated <?php echo get_possessive_form($user->getId());?> 
+<?php if($notification->get_entity_extra()){?>
+<a href="<?= base_url() ?>user/profile/<?php echo $notification->get_user_from_id().prepare_que_str_mobile($notification)?>?goto=extracurricular"><?php 
+	$subject = str_replace("_", ", ", $notification->get_entity_extra());
+	$subject = str_replace("clubmembership", "club memberships", $subject);
+	$search = ',';
+	$replace = ' and';
+	echo strrev(implode(strrev($replace), explode($search, strrev($subject), 2))); 
+?></a>
+<?php }?>

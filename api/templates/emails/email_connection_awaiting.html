@@ -1,0 +1,69 @@
+<p><?php echo $requester_name;?> recently invited you to connect.</p>
+<p>What would you like to do?</p>
+<p><a style="background-color: #005393;
+	background-repeat: no-repeat;
+	font-weight: bold;
+	font-size: 11px;
+	color: #FFF;
+	display: inline-block;
+	text-decoration: none;
+	border: 1px solid #bababa;
+	border-bottom: 1px solid #a5a5a5;
+	padding: 0 7px;
+	line-height: 2.363636364;
+	cursor: pointer;
+	position: relative;
+	text-shadow: 0 1px 0 #ffffff;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+	text-align: center;
+	white-space:nowrap;" href="<?= base_url() ?>connection/accept/<?=$connection_id?>">Accept</a>&nbsp;&nbsp;
+	<a style="background-color: #ededed;
+	background-repeat: no-repeat;
+	font-weight: bold;
+	font-size: 11px;
+	color: #555555;
+	display: inline-block;
+	text-decoration: none;
+	border: 1px solid #bababa;
+	border-bottom: 1px solid #a5a5a5;
+	padding: 0 7px;
+	line-height: 2.363636364;
+	cursor: pointer;
+	position: relative;
+	text-shadow: 0 1px 0 #ffffff;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+	text-align: center;
+	white-space:nowrap;" href="<?= base_url() ?>connection/delete_by_fid/<?=$connection_id?>">Ignore</a></p>
+<hr style="border-bottom: 1px solid #ACACAC; border-style: none none dotted;">
+<div>
+	<div style="float: left; position: relative; margin-right: 20px;">
+		<img src="<?php echo $requester_pic;?>">
+	</div>
+	<div style="float:none;">
+		<p>
+			<strong><?php echo $requester_name;?></strong><br>
+			<?=$requester_degree?>
+		</p>
+		<p>&nbsp;</p>
+		<p><a style="background-color: #005393;
+	background-repeat: no-repeat;
+	font-weight: bold;
+	font-size: 11px;
+	color: #FFF;
+	display: inline-block;
+	text-decoration: none;
+	border: 1px solid #bababa;
+	border-bottom: 1px solid #a5a5a5;
+	padding: 0 7px;
+	line-height: 2.363636364;
+	cursor: pointer;
+	position: relative;
+	text-shadow: 0 1px 0 #ffffff;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+	text-align: center;
+	white-space:nowrap;" href="<?= base_url() ?>user/profile/<?=$requester_id?>">View Profile</a></p>
+	</div>
+</div>
+<div style="clear:both;"></div>
+<p><a href="<?= base_url() ?>">Sign in to UCROO</a></p>
+<span style="font-size:10px;color:#999;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;"><a style="color:#538dc2" href="<?= base_url() ?>user/unsubscribe/<?=$cron_type?>/<?=$user_id?>" target="_blank">Click here</a> to Unsubscribe</span>

@@ -1,0 +1,22 @@
+- model: universities.University
+  pk: 1
+  fields:
+      name: Ucroo University
+
+- model: universities.Campus
+  pk: 1
+  fields:
+      uni: 1
+      name: Johnston St Campus
+
+- model: universities.School
+  pk: 1
+  fields:
+      uni: 1
+      name: Dev School
+
+- model: universities.course
+  pk: 1
+  fields:
+      uni: 1
+      name: Bachelor of Computer Science

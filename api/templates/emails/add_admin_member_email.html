@@ -1,0 +1,63 @@
+<p>Hi <?=$user?>,</p>
+
+<p>You have been added as an Administrator to <?=$club->getShort_name()?>'s Club Page on UCROO!</p>
+
+<?php if($club->getUni()->getId() != 6){?>
+
+<p>UCROO is a new website that helps students engage with their university community. To help connection with student organisations, UCROO allows clubs like us to create Club Pages.</p>
+
+<p>Having a Club Page on UCROO means:</p>
+
+<?php 
+/*
+ * #3640 CSU - Removing the text ' and buy tickets to their events' - Kaushal
+ */
+if($club->getUni()->getId() != 6){
+?>
+<ul>
+	<li>Students can join the <?=$club->getShort_name()?> any time, all year-round </li>
+	<li>Membership renewal each year is quick and easy</li>
+	<li>Students can buy tickets to our events online</li>
+	<li>Communication with members is improved</li>
+	<li>We save time and money usually spent on membership cards and bulk SMS</li>
+	<li>All our administration and reporting requirements are taken care of</li>
+	<li>Your position just became a whole lot easier!</li>
+</ul>
+<p>Being an Administrator on UCROO allows you to:</p>
+<ul>
+	<li>Edit the <?=$club->getShort_name()?> Club Page</li>
+	<li>Create and manage ticketed events</li>
+	<li>Manage the <?=$club->getShort_name()?> membership database</li>
+	<li>Download aggregated revenue reports</li>
+	<li>Manage the <?=$club->getShort_name()?>'s bank account details</li>
+</ul>
+<?php } else { ?>
+<ul>
+	<li>Communication with members is improved</li>
+	<li>We save time and money usually spent on bulk SMS</li>
+	<li>All our administration and reporting requirements are taken care of</li>
+	<li>Your position just became a whole lot easier!</li>
+</ul>
+<p>Being an Administrator on UCROO allows you to:</p>
+<ul>
+	<li>Edit the <?=$club->getShort_name()?> Club Page</li>
+	<li>Download aggregated revenue reports</li>
+	<li>Manage the <?=$club->getShort_name()?>'s bank account details</li>
+</ul>
+<?php } ?>
+
+<p>To see Club Pages in action, check out the video attached - <a href="https://www.youtube.com/watch?v=NJJvFHQBpKc">UCROO Club Pages Video</a></p>
+
+<?php }?>
+
+<?php if ($type!='user') { ?>
+  <p><strong>Finish creating your account to access the <?=$club->getShort_name()?> Club Page by clicking below</strong></p>
+
+  <p><a href="<?=  base_url()?>auth/aaf" class="btn btn-super_large btn-dark_blue btn-serif">Create Account</a></p>
+
+  <p>I look forward to seeing you on UCROO soon!</p>
+<?php } ?>
+
+<?=$club->getOwner()->getMeta()->getName()?><br />
+<?=$club->getOwner_position()?><br />
+<strong><?=$club->getName()?></strong><br />

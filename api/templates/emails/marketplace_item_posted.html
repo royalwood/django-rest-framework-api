@@ -1,0 +1,11 @@
+<?php
+  if(is_object($friend))
+    $to_name = $friend->getMeta()->getFirst_name();
+  else
+    $to_name = $friend['username'];
+?>
+
+<p>Hi <?=$to_name?>,</p>
+<p><?=$user->getUsername();?> has posted a <a href="<?=base_url()?>marketplace/item/<?=$marketplace->getFeed_post_id()?>"><?=$marketplace->getItem_name()?></a> for sale in the UCROO Student Marketplace.</p>
+<p>Got something to sell? Post it in the <a href="<?=base_url()?>marketplace/listing">Student Marketplace</a>.</p>
+<p>Have a great day!</p>

@@ -1,0 +1,11 @@
+<p>Hi <?= $user ?>,</p>
+
+<p>I would like to invite you to join the <?= $module->getName() ?> Page on UCROO.</p>
+
+<p>Having a UCROO Page for our Service creates greater awareness of the <?= $module->getName() ?> and makes the Service more accessible to all students.</p>
+
+<p>I look forward to seeing you on UCROO.</p>
+
+<p>Kind regards,</p>
+<?= $module->getOwner()->getMeta()->getName() ?><br />
+Sign In to UCROO (<?= base_url() ?>auth/aaf)

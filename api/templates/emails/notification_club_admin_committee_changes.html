@@ -1,0 +1,83 @@
+<? 
+  $this->load->helper("notification_event_helper.php");
+  
+	$displayed = array(); //used to prevent multiple classes being displayed
+
+  /* #5106 22/Sep2015 - Added condition to remove worning in email template - Kaushal */
+  if(isset($all_notifications) && count($all_notifications) > 0){
+  	foreach($all_notifications as $notif)
+  	{
+  		$cal_id = $notif->get_entity_id();
+      
+      $usr = repo($notification->get_entity_type())->findOneBy(array('id'=>$cal_id));
+      if (method_exists($usr, 'getUser_id')) {
+        $cal_id = $usr->getUser_id();
+      }
+
+  		if( ! in_array($cal_id, $displayed))
+  		{
+        $displayed[] = $cal_id;
+  		}
+  	}
+  }
+
+  $club = NULL;
+  $entity_user = NULL;
+  if(strpos($notification->get_entity_extra(), 'delete') !== false) {
+    $entity_user = em()->getRepository('models\\Users')->findOneBy(array('id'=>$notification->get_entity_id()));
+    $extra = $notification->get_entity_extra();
+    $club_id = substr($extra, stripos($extra, '_CLUB_ID_') + 9);
+    $club = em()->getRepository('models\\Club')->findOneBy(array('id'=>$club_id));
+  } else {
+    $entity = em()->getRepository('models\\' . $notification->get_entity_type())->findOneBy(array('id'=>$notification->get_entity_id()));
+    $club = $entity->getClub();
+    $entity_user = $entity->getUser();
+  }
+  if(NULL == $club || NULL == $entity_user)
+    return '[Unknown Error]';
+  
+ 
+  $user_id = $entity_user->getId();
+  $club_id = $club->getId();
+  
+  $name = array();
+  $have = (count($displayed) == 1)?FALSE:TRUE;
+  
+  foreach ($displayed as $displayed_id) {
+    $displayed_user = em()->getRepository('models\\Users')->findOneBy(array('id'=>$displayed_id));
+    
+    if ($displayed_user) {
+      if($displayed_id != get_userid())
+        $name[] = anchor('user/profile/'.$displayed_user->getId().prepare_que_str_mobile(array('UserInfo', $displayed_user->getId())), $displayed_user->getUsername() . '{PLACEHOLDER}');
+      else {
+        $have = TRUE;
+        $name[] = anchor('user/profile/'.$displayed_user->getId().prepare_que_str_mobile(array('UserInfo', $displayed_user->getId())), 'You{PLACEHOLDER}');
+      }
+    }
+  }
+
+  $type = FALSE;
+  if(strpos($notification->get_entity_extra(), 'admin') !== false) {
+    $type = (count($name)>1)?'admins':'an admin';
+  } else if(strpos($notification->get_entity_extra(), 'committee') !== false) {
+    $type = (count($name)>1)?'committee members':'a committee member';
+  }
+
+  $message = '';
+  if(strpos($notification->get_entity_extra(), 'add') !== false) {
+    $message = implode_and($name) . ' '. ($have ? 'have' : 'has') .' been added as ' . $type . ' of the ';
+    $message = str_replace("{PLACEHOLDER}", '', $message);
+  }
+    
+  else if(strpos($notification->get_entity_extra(), 'delete') !== false) {
+    $message = implode_and($name) . ' '. ($have ? 'have' : 'has') .' been deleted as ' . $type . ' of the ';
+    $message = str_replace("{PLACEHOLDER}", '', $message);
+  }
+  
+  else if(strpos($notification->get_entity_extra(), 'modify') !== false) {
+    $message = implode_and($name) . ' position as ' . $type . ' has been changed to "'.$entity->getPosition().'" of the ';
+    $message = str_replace("{PLACEHOLDER}", ($have ? "r " : "'s "), $message);
+  }
+?>
+
+<?=$message?> <?php echo anchor(base_url() .'club/view/'.$club->getId().prepare_que_str_mobile(array('clubInfo', $club->getId())), $club->getName() . ' (' . $club->getShort_name() . ')');?>

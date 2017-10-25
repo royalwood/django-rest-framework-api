@@ -1,0 +1,16 @@
+<p>Hi <?= $user ?>,</p>
+
+<p>You've been added as a staff member to the <?= $module->getName() ?> Page on UCROO!</p>
+
+<p>UCROO is <?= $module->getUni()->getName() ?>'s private online network, which helps students better connect with their peers and staff at the university.</p>
+
+
+<p>To better connect students with Student Services, UCROO allows services like us to create a Services Page.</p>
+
+<p>Having a UCROO Page creates greater awareness of the <?= $module->getName() ?> and makes our service more accessible to students.</p>
+
+<p>I look forward to seeing you on UCROO.</p>
+
+<p>Kind regards,</p>
+<?= $module->getOwner()->getMeta()->getName() ?><br />
+Create a UCROO Account (<?= base_url() ?>auth/aaf)

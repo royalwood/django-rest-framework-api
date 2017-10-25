@@ -1,0 +1,27 @@
+<p>Hi <?php echo $firstname ?>,</p>
+<p>Welcome to Forme!</p>
+<p>You will receive an email with your log in details for your digital learning platform very soon, but first we would like to invite you to log into your UCROO account.</p>
+<p>UCROO is our interactive online social network, exclusive to our students. Your log in details are below:</p>
+<p><b><?php echo $label;?>: </b><?php echo $username;?></p>
+<p><b>Password: </b><?php echo $password;?></p>
+
+<a href="<?= base_url('login').prepare_que_str_mobile(array('Login',0)) ?>">Sign In</a>
+
+<p>Please log into your account with the above details, and then you are only moments away from joining our interactive online social network which is a private and secure way for you to engage with the Forme community and connect with other students, classmates, and staff.</p>
+
+<p>Some things to note:</p>
+<p>- You can change your password at any time from Account Settings or when logging in for the first time from a web browser.</p>
+
+<p>- By logging into UCROO you agree to UCROO's <a href="<?php echo base_url('terms');?>">Terms of Use</a> and <a href="<?php echo base_url('privacy');?>">Privacy Policy</a> <?php if(isset($policy)){?>
+and your <a href="<?php echo $policy;?>">Academic Institution's Usage Policy</a></p>
+<?php } ?>
+
+<p>We wish you every success with your studies</p>
+<p>Download the UCROO App</p>
+<p>
+<div class="play-store">
+<a href="https://itunes.apple.com/au/app/ucroo/id662021285?mt=8" target="_blank"><img src="<?php echo cdn_url("images/apple-store.png");?>" alt="" class="mrgnRt"></a>  
+
+<a href="https://play.google.com/store/apps/details?id=com.ucroo" target="_blank"><img src="<?php echo cdn_url("images/google-store.png");?>" alt=""></a></div>
+</p>
+<p>Forme Education</p>

@@ -1,0 +1,48 @@
+<p><?= $connection ?> has added the following subjects to your profile:</p>
+<?php foreach ($units as $unit): ?>
+<p><?= $unit ?></p>
+<?php endforeach ?>
+
+<p>Are these subjects correct?</p>
+
+<p>
+	<a href="<?= base_url("classes").prepare_que_str_mobile(array('unit',0)) ?>" style="background-color: #005393;
+		background-repeat: no-repeat;
+		font-weight: bold;
+		font-size: 11px;
+		color: #FFF;
+		display: inline-block;
+		text-decoration: none;
+		border: 1px solid #bababa;
+		border-bottom: 1px solid #a5a5a5;
+		padding: 0 7px;
+		line-height: 2.363636364;
+		cursor: pointer;
+		position: relative;
+		text-shadow: 0 1px 0 #ffffff;
+		text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+		text-align: center;
+		white-space:nowrap;">
+		Yes
+	</a>
+
+	<a href="<?= base_url('classes').prepare_que_str_mobile(array('unit',0)) ?>" style="background-color: #ededed;
+		background-repeat: no-repeat;
+		font-weight: bold;
+		font-size: 11px;
+		color: #555555;
+		display: inline-block;
+		text-decoration: none;
+		border: 1px solid #bababa;
+		border-bottom: 1px solid #a5a5a5;
+		padding: 0 7px;
+		line-height: 2.363636364;
+		cursor: pointer;
+		position: relative;
+		text-shadow: 0 1px 0 #ffffff;
+		text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+		text-align: center;
+		white-space:nowrap;">
+		No
+	</a>
+</p>

@@ -1,0 +1,9 @@
+<p>Hi <?php echo $user ?>,</p>
+<p>You have been invited to the <?php echo $module->getCodeName()?> Class on UCROO.</p>
+<p>Click the 'Join UCROO' button below to join.</p>
+<a class='btn btn-dark_blue btn-auto_width' href='<?php echo base_url() ?>auth/aaf'>Join UCROO</a>
+<p>I look forward to seeing you on UCROO.</p>
+<br/>
+<p>Kind regards,</p>
+<?php echo $this->user->getMeta()->getName() ?><br />
+Create a UCROO Account (<?php base_url() ?>auth/aaf)

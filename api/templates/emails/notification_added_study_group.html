@@ -1,0 +1,32 @@
+<?php 
+$user = $notification->get_user_from();
+$study_group = repo('Study_group')->findOneBy(array('id'=>$notification->get_entity_id()));
+?>
+
+<?php if (isset($is_menu)) { ?>
+  <div onclick="location.href='<?=base_url()?>feed_posts/study_group/<?=$notification->get_entity_id()?>'">
+<? } ?>
+
+<?php 
+$iconClass = 'post-icon';
+$detailsClass = 'post-details';
+if (isset($is_menu)) { 
+  $iconClass = 'msg-icon';
+  $detailsClass = 'msg-details';
+}
+?>
+
+<div class="<?=$detailsClass?>">
+  <?php if (!isset($is_menu)) { ?>
+  <div class="float-right icon-delete"><a href="<?=base_url()?>notification/delete/<?=$notification->get_id()?>" title="delete"><div class="only-web-hidden">Delete</div></a></div>
+  <? } ?>
+
+	<?php if($user):?>
+		<span class="user-name"><?= anchor('user/profile/'.$user->getId().'/about'.prepare_que_str_mobile(array('UserInfo', $user->getId())), get_name($user->getId())) ?></span>
+	<?php else:?>
+		<span class="user-name">Inactive user</span>
+	<?php endif;?>
+	 added you to the study group <?= anchor('study/'.$study_group->getId().'/feed'.prepare_que_str_mobile($notification), $study_group->getName()) ?>
+
+</div>
+

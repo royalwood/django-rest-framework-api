@@ -1,0 +1,70 @@
+<style>
+  body { padding: 0; }
+  @media only screen and (max-width: 600px) {
+    .content-wrap { width: 98% !important; }
+    .leo-logo{width:50% !important}
+    .leo-logo img{width:50%;}
+  }
+
+  @media only screen and (max-width: 480px) {
+    .content-wrap { width: 98% !important; }
+    .leo-logo{width:45% !important;padding:10px !important;}
+    .leo-logo img{width:60%;}
+    .text{font-size:18px !important;padding:20px 10px !important;width:65% !important;}
+    .content{padding:15px 10px !important;font-size:16px !important}
+    .unsubscribe {padding-left: 10px;padding-right: 10px;}
+    .notifications {padding-left: 10px;padding-right: 10px;}
+  }
+
+  @media only screen and (max-width: 360px) {
+    .content-wrap { width: 98% !important; }
+    .leo-logo{width:32% !important;}
+    .leo-logo img{width:100%;}
+  }
+</style>
+
+<table class="content-wrap" style="margin:0 auto;" border="0" cellpadding="0" cellspacing="0" width="598">
+  <tr>
+    <td colspan="2" style="background:#195e47;-webkit-border-radius:5px 5px 0 0 ; -moz-border-radius:5px 5px 0 0 ; border-radius:5px 5px 0 0 ;" class="header">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="padding:55px 35px;width:320px" class="leo-logo"><a href="https://lionsshare.saintleo.edu/" target="_blank"><img src="<?php echo cdn_url("images/stleo-logo.png");?>" alt="Saint Leo" style="border: 0;width: 320px"/></a></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <td class="text" style="background:#eaaf0f;color:#195e47;font-size:24px;font-family: Helvetica,Arial,sans-serif;padding:30px 35px;width:100%;">
+                  <?=$title?>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+  </tr>
+
+  <tr>
+    <td colspan="2"  style="padding:65px 35px; -webkit-border-radius:0 0 5px 5px; -moz-border-radius: 0 0 5px 5px; border-radius:0 0 5px 5px;background:#ffffff;font-family: Helvetica,Arial,sans-serif;font-size:18px;color:#333333;border:1px solid #ebebeb;border-top:0;" class="content">
+      <?=$message?>
+      <?php if(!strstr($message, 'Kind regards')){?>
+      <?php }?>
+    </td>
+  </tr>
+
+  <tr><td>&nbsp;</td></tr>
+
+  <?php if($unsubscribe_link!=''){?>
+  <tr>
+    <td colspan="2" style="font-size:12px;color:#999;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;" class="unsubscribe">
+      <a style="color:#a05175" href="<?= $unsubscribe_link;?>" target="_blank">Click here</a> to Unsubscribe
+    </td>
+  </tr>
+  <?php } ?>
+
+  <tr>
+    <td colspan="2" style="font-size:12px;color:#999;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;padding-top: 20px; padding-bottom: 20px;" class="notifications">
+      <a style="color: #a05175" href="<?=base_url()?>account/notifications<?php echo prepare_que_str_mobile(array('AccountSetting',0));?>" target="_blank">Turn on/off email notifications</a>
+    </td>
+  </tr>
+</table>

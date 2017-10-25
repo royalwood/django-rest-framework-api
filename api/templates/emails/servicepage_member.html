@@ -1,0 +1,43 @@
+  <p>Hi <?=$user?>!<br /><br />
+  Welcome to the <?=$club->getName();?>!</p>
+  <p> We're so happy you're our newest member for 2013!<br /><br />
+      So you can take full advantage of your membership this year, the <?=$club->getShort_name();?> has teamed up with UCROO so you can:
+  </p>
+  <p>
+    <ul>
+      <li>Use your smartphone as a membership card – save this to your phone for events!</li>
+      <li>Keep up to date with the latest <?=$club->getShort_name();?> news and events</li>
+      <li>Buy tickets to our events online</li>
+      <li>Access important resources shared by the club</li>
+    </ul>
+  </p>
+  
+  <br /><b>What else can you do on UCROO?</b><br />
+  
+  <p><b>Apart from being the one-stop-shop for all things <?=$club->getShort_name();?> related, you can also:</b></p>
+  <ul>
+    <li>Easily join other clubs and societies at <?=$club->getUni()->getName();?></li>
+    <li>Share timetables with peers so you know who you've got class with and when they're free</li>
+    <li>Tap into the collective brain of current and past students for help on coursework</li>
+    <li>Form study groups with assignment partners so you don't have to add them on Facebook</li>
+    <li>Chat with peers, classmates, academics and services staff when they're online</li>
+    <li>Share, laugh and create with the peers in your year level, course and school</li>
+    <li>Connect with employers related to your degree</li>
+  </ul>
+
+  <p>See what students and university staff are saying about UCROO by viewing this <a href="http://www.youtube.com/watch?v=Yg2FQZEe9GU">video</a>.</p>
+  
+  
+  
+  <?php if ($type!='user') { ?>
+    <p>Or, finish creating your UCROO account below:</p>
+    <a href="<?=  base_url()?>auth/aaf">
+      Create account
+    </a>
+  
+    <p>We look forward to seeing you on UCROO soon!</p>
+  <?php } ?>
+    
+  <?=$club->getOwner()->getMeta()->getName()?><br />
+  <?=$club->getOwner_position()?><br />
+  <strong><?=$club->getName()?></strong><br />

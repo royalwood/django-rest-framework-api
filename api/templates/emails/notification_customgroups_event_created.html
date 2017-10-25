@@ -1,0 +1,23 @@
+<?php
+$event = repo($notification->get_entity_type())->findOneBy(array('id' => $notification->get_entity_id()));
+$module_id = $event->getModule_id();
+$module_name = $event->getModule_name();
+
+$module = repo($module_name)->findOneBy(array('id' => $module_id));
+?>
+
+<?php if (isset($is_menu)) { ?>
+  <div onclick="location.href = '<?= base_url() ?>event/view/customgroups/<?= $event->getId() ?>'">
+<? } ?>
+
+<?php 
+$iconClass = 'post-icon';
+$detailsClass = 'post-details';
+if (isset($is_menu)) { 
+  $iconClass = 'msg-icon';
+  $detailsClass = 'msg-details';
+}
+?>
+<div class="<?=$detailsClass?>">
+  <span class="user-name"><?php echo anchor(base_url() . 'customgroups/view/' . $module->getId().prepare_que_str_mobile(array('CustomGroupInfo', $module->getId())), $module->getName()); ?></span>: New event created - <?php echo anchor(base_url() . 'event/view/customgroups/' . $event->getId().prepare_que_str_mobile($notification), $event->getTitle()); ?>
+</div>

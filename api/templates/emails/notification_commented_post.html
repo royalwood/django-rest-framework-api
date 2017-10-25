@@ -1,0 +1,49 @@
+<? 
+
+/*
+ * Pretty much identical to views in the views/notification folder so go have a look ther
+ * 
+ */
+
+		// TODO put the em() function in general_helpers
+	$this->load->helper("notification_event_helper.php");
+	$post = em()->getRepository('models\Post')->find($notification->get_entity_id());
+	// FIXME post shuold have a getUser method	
+	if($post)	{
+		$post_owner = em()->getRepository('models\Users')->find($post->getUser_id())->getId();
+		$post_type = strtoupper($post->getCategory());
+		
+		$words = explode(' ',$post->getContent());
+		$description = '';
+		if(sizeof($words) > 0)
+			$description .= $words[0];
+		if(sizeof($words) > 1)
+			$description .= ' '.$words[1];
+		if(sizeof($words) > 2)	
+			$description .= ' '.$words[2];
+		if(sizeof($words) > 3)
+			$description .= ' ...';
+		$description .= '';
+		
+	}
+	else	{
+		$post_owner = '';
+		$post_type = 'post';
+		$description = '';
+	}
+	
+	$href = base_url().'feed/view_post/'.$notification->get_entity_id().prepare_que_str_mobile($notification);
+	$post_link = anchor($href, $post_type);
+	
+	if($notification->get_user_to()->getId() == $post_owner) {
+		$message = " commented on your" ;
+		$postscript = "";
+	} else{
+		$message = " also commented on a";
+		$postscript = "that you commented on";
+	}
+	
+?>
+	<p><?= "A student has $message $post_link $postscript"?></span><span class="post-description"> - "<?=clickable_link_shorten($description)?>"</p>
+
+	<p><?=anchor($href, "View the post and comments")?></p>

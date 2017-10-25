@@ -1,0 +1,80 @@
+<?
+$photo_url = get_user_profile_pic($id, 'small');
+?>
+
+<p>
+  You have not yet connected with <?= anchor('user/profile/' . $id, $username) ?> on UCROO.
+</p>
+<p>
+  Would you like to connect now?
+</p>
+<div>
+  <table width="100%">
+    <tr>
+      <td colspan = "2" style="text-align: center;">
+        <img style="text-align: center;" src="<?= $photo_url ?>"/>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">
+        <a href="<?= base_url() ?>connection/add/<?= $id ?>/<?= $processing_user_id ?>" style="-moz-box-sizing: border-box;
+           text-align: center;
+           white-space: nowrap;-moz-border-bottom-colors: none;
+           -moz-border-left-colors: none;
+           -moz-border-right-colors: none;
+           -moz-border-top-colors: none;
+           background-color: #005393;
+           background-image: linear-gradient(to bottom, #0069B5, #004376);
+           background-repeat: no-repeat;
+           border-color: #005899 #005899 #002D4E;
+           border-image: none;
+           border-style: solid;
+           border-width: 1px 1px 3px;
+           box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(255, 255, 255, 0.2) inset;
+           color: #FFFFFF;
+           cursor: pointer;
+           display: inline-block;
+           font-size: 11px;
+           font-weight: bold;
+           line-height: 2.36364;
+           margin: 0;
+           padding: 0 7px;
+           position: relative;
+           text-decoration: none;
+           text-shadow: 0 1px 0 rgba(0, 0, 0, 0.8);">Connect</a>
+        <!--      </td>
+              <td>-->
+        <a href="<?= base_url() ?>connection/reject_suggestion/<?= $id ?>/<?= $processing_user_id ?>" style="-moz-border-bottom-colors: none;
+           -moz-border-left-colors: none;
+           -moz-border-right-colors: none;
+           -moz-border-top-colors: none;
+           -moz-box-sizing: border-box;
+           background-color: #EDEDED;
+           background-image: linear-gradient(to bottom, #F4F4F4, #EBEBEB);
+           background-repeat: no-repeat;
+           border-color: #BABABA #BABABA #A5A5A5;
+           border-image: none;
+           border-style: solid;
+           border-width: 1px;
+           box-shadow: 0 1px 1px #FFFFFF inset, 0 1px 0 #B2B1B1, 0 2px 0 #A5A5A5, 0 3px 1px #CFCFCF, 0 3px 1px rgba(0, 0, 0, 0.25);
+           color: #555555;
+           cursor: pointer;
+           display: inline-block;
+           font-size: 11px;
+           font-weight: bold;
+           line-height: 2.36364;
+           margin: 0 4px;
+           padding: 0 7px;
+           position: relative;
+           text-align: center;
+           text-decoration: none;
+           text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+           white-space: nowrap;">No, Thanks</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!--</p>
+</div>
+</div>-->

@@ -1,0 +1,23 @@
+<?php
+$mentor_group_id = $notification->get_entity_id();
+if(isset($mentor_group_id)){
+	$mentor_group_name = em()->getRepository('models\Ucroo_mentor')->getMentorGroupNameByID($mentor_group_id);
+}
+if(!$mentor_group_name){
+	$mentor_group_name = "Click Here";
+}
+$keyword = 'stest';
+$user_from_id = $notification->get_user_from()->getId();
+if(empty($user_from_id)) {
+  $user_from_id = get_userid();
+}
+$user = em()->getRepository('models\User_meta')->findOneBy(array('user_id'=>$user_from_id));
+$post_link = base_url() . "mentorgroup/" . $mentor_group_id.'/feed'.prepare_que_str_mobile($notification);
+//$event = $member->getEvent();
+$name = '';
+$name = $user->getFirst_name() . ' ' . $user->getLast_name();
+?>  
+
+<span class="user-name"><?= anchor('user/profile/' . $user->getUser_id().'/about'.prepare_que_str_mobile(array('UserInfo', $user->getId())), $name) ?></span>
+<?= 'has added you as a mentee to the mentor group "'.anchor($post_link, $mentor_group_name).'"' ?>
+

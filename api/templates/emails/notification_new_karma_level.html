@@ -1,0 +1,9 @@
+<?php
+    $this->load->helper("notification_event_helper.php");
+    $model = em()->getRepository('models\\' . $notification->get_entity_type())->find($notification->get_entity_id());
+?>
+<p>
+    Congratulations: You reached a new Karma level!
+    Your new level is: <?= $model->getLevel_title() ?>.
+    You can view your new Karma Avatar in your <a href="<?=base_url()?>/user/profile/<?= $notification->get_user_to_id().prepare_que_str_mobile(array('UserInfo',$notification->get_user_to_id())) ?>"><b>Profile</b></a>.
+</p>

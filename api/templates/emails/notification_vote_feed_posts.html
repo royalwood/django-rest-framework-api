@@ -1,0 +1,42 @@
+<?php
+	// TODO put the em() function in general_helpers
+	$this->load->helper("notification_event_helper.php");
+	$post = em()->getRepository('models\Feed_posts')->find($notification->get_entity_id());
+  	$object = $post->getFeedObject();
+	// FIXME post shuold have a getUser method	
+  if(!$object){
+  	return;
+  }
+	$href = base_url().'feed_posts/view/'.$post->getId().prepare_que_str_mobile($notification);
+
+	$feed_object = $post->getFeed_object();
+	if ($feed_object == 'year') {
+		if($post->getFeedObject()->getName() == 'Final year'){
+	    	$object_image = "notif-final-year.png";
+	    }else{
+	    	$object_image = "notif-first-year.png";
+	    }
+	}
+  	else
+	{
+		if(!is_object($feed_object))
+	      $object_image = "notif-$feed_object.png";
+	    else
+	      $object_image = "notif-".$feed_object->getFeedObject().".png";
+	}
+
+	//$object_image = "notif-$feed_object.png";
+?>
+
+<span>
+<b><?=anchor('feed_posts/'.$object->getFeedUrl().'/'.$object->getId().prepare_que_str_mobile(array($object->getFeedUrl(), $object->getId())), $object->getName_for_feed())?></b> &mdash;
+Your <?=$post->getType()?> 
+- "<? 
+if($entity->getType() == 'link'){
+	echo $post->getContent();
+}else{
+	echo truncate_text_email_content($post->getContent(),150,$href);
+}
+?>" has received <?=$post->getNum_votes()?> <?=plural_option('like', $post->getNum_votes())?>
+</span>
+</br></br></br></br>

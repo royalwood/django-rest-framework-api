@@ -1,0 +1,23 @@
+	<h2 style="font-size: 14px; line-height: 1.2em;">You have been invited to join <strong><?php echo $subject_code . " - " . $subject_name; ?></strong> on UCROO</h2>
+	<p>
+		Dear <?=ucwords($lecturer_name);?>,
+	</p>
+	<p>
+		One of your students has requested that you participate in the class discussion on UCROO.
+	</p>
+	<h3 style="font-size: 12px; line-height: 1.2em;">What is UCROO?</h3>
+
+	<p>
+		UCROO is a social learning network that encourages peer-to-peer learning online. In order to ensure that your students are learning effectively it helps to have academics involved.
+	</p>
+
+	<p>
+		What are the benefits for academics?
+	</p>
+	<ol>
+		<li>Save time - avoid answering the same email over and over by answering questions on a platform where students are actively engaged</li>
+		<li>Better student results - research suggests that social learning is a great way for students to learn. Our platform enables students to discuss course content at any time by asking each other questions, posting videos and uploading files</li>
+		<li>Students like using UCROO - usability is crucial to the online learning experience which is why we have created a seamless interface</li>
+		<li>Assessment reminders - create automatic reminders so students remember to submit assignments on time</li>
+	</ol>
+	<a href="<?=base_url('signup').prepare_que_str_mobile(array('Signup',0));?>">Sign up now to get started!</a>

@@ -1,0 +1,138 @@
+
+<?php if (!empty($personal_assessments) || !empty($academic_assessments)) : ?>
+    <h3>Assignments</h3>
+
+    <?php if (!empty($personal_assessments)) : ?>
+
+        <span style="text-decoration: underline; font-weight: bold;">Personal:</span><br />
+
+        <table cellpadding="2" cellspacing="0" border="0" style="padding:0; color: #000000;
+							 font-size: 12px; line-height: 1.2em;
+							 font-family: Helvetica, Helvetica, Arial, sans-serif; ">
+            <?php foreach ($personal_assessments AS $pa) { ?>
+            <tr>
+                <td><?= $pa->getAssessment_date()->format('jS M') ?></td>
+                <td style="color: #a12626;"><span style="padding: 0 10px;"><?= $pa->getTitle() ?></span></td>
+                <td style="text-align: right; white-space: nowrap">
+                    <?php echo $pa->getTime_from()->format('G:i')?> -
+										<?php echo $pa->getTime_to()->format('G:i');?>
+                </td>
+                <td></td>
+                <td style="text-align: right;">   
+                    
+                </td>
+            </tr>
+        <?php } ?>
+        </table>
+        <br />
+    <?php endif; ?>
+
+
+
+    <?php if (!empty($academic_assessments)) : ?>
+
+        <span style="text-decoration: underline; font-weight: bold;">Academic:</span><br />
+
+        <table cellpadding="2" cellspacing="0" border="0" style="padding:0; color: #4B4B4B;
+							 font-size: 12px; font-style: inherit; line-height: 1.2em;
+							 font-family: Helvetica, Helvetica, Arial, sans-serif; ">
+        <?php foreach ($academic_assessments AS $pa) { ?>
+            <tr>
+                <td><?= $pa->getAssessment_date()->format('jS M') ?></td>
+                <td style="color: #a12626;"><span style="padding: 0 10px;"><?= $pa->getTitle() ?></span></td>
+                <td style="text-align: right;white-space: nowrap">
+                    <?php echo $pa->getTime_from()->format('G:i')?> -
+										<?php echo $pa->getTime_to()->format('G:i');?>
+                </td>
+                <td></td>
+                <td style="text-align: right;">   
+                    
+                </td>
+            </tr>
+        <?php } ?>
+        </table>
+        <br />
+    <?php endif; ?>
+<?php endif; ?>
+
+
+<?php if (empty($clsses_today)) { ?>
+
+    <p>You have a Day off today. Enjoy it!</p>
+
+<?php } else { ?>
+    <h3>Classes</h3>
+    <table cellpadding="6" cellspacing="0" border="0" style="padding:0; color: #4B4B4B;
+					 font-size: 14px; line-height: 1.2em;
+					 min-width: 320px; font-family: Helvetica, Helvetica, Arial, sans-serif; ">
+    <?php foreach ($clsses_today AS $class) { ?>
+       
+        <?php if(true == $class['break']) { ?>
+             <?php 
+               $duration  = $class['break_hours'] == 0 ? "" : $class['break_hours'];
+               if($class['break_hours'] > 1 )
+                   $duration .= ' hours';
+               else if($class['break_hours'] == 1)
+                   $duration .= ' hour';
+               
+               if($class['break_hours'] > 0 && $class['break_minutes'] > 0)
+                   $duration .= ' and ';
+               
+               $duration .= $class['break_minutes'] == 0 ? "" : $class['break_minutes'];
+               if($class['break_minutes'] > 1 )
+                   $duration .= ' minutes';
+               else if($class['break_minutes'] == 1)
+                   $duration .= ' minute';
+            ?>
+            <tr style="">
+                <td style="text-align: right; background-color: #F5F5F5; border-bottom: 5px solid #FFF;">
+                    <?=$class['from']->format('G:i'); ?> - <?=$class['to']->format('G:i')?>
+                </td>
+                <td style=" background-color: #F5F5F5; border-bottom: 5px solid #FFF;">
+                    <span style="padding-left:10px;">Break</span>
+                </td>
+                <td style=" background-color: #F5F5F5; border-bottom: 5px solid #FFF;">
+                    <?=$duration?>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" style="border-bottom: 5px solid #FFF;">
+                    <div style="border-bottom: 10px solid #FFF;"><?=$class['count']?> <?=plural_option('connection', $class['count'])?>
+                        <?php echo $class['count'] != 1 ? 'are' : 'is' ?> free during this break<?php echo $class['count'] ? ':' : '' ?></div>
+                    <div style="padding-bottom: 5px">
+                        <?php foreach($class['friends'] as $user):?>
+                            <a href="<?=base_url()?>user/profile/<?=$user->getId()?>">
+                            <div style="float: left; cursor: pointer;padding-right: 2px;" onclick="location.href='<?=base_url()?>user/profile/<?=$user->getId()?>'">
+                                <?php $path = get_user_profile_pic($user->getId(),'square');?>
+                                <?php $timeTill = $user->getUsername();?>
+                                <?=img(array('src'=>$path,'width'=>'50', 'alt' => $user->getUsername(), 'title' => $timeTill))?><br />
+                            </div>
+                            </a>
+                        <?php endforeach;?>
+                        <div style="clear: both;"></div>
+                    </div>
+                </td>
+            </tr>
+        
+        <?php } else { ?>
+           <?php  $class = $class['class'];?>
+            <tr>
+                <td style="text-align: right; background-color: #F5F5F5; white-space: nowrap;
+										border-bottom: 5px solid #FFF; font: normal 14px Arial;">
+                    <?php echo $class->getTime_from()->format('G:i'); ?> -
+										<?php echo $class->getTime_to()->format('G:i') ?>
+                </td>
+                <td style=" background-color: #F5F5F5; border-bottom: 5px solid #FFF; white-space: nowrap;">
+                    <span style="padding-left:10px;"><?php echo $class->getTitle(); ?></span>
+                </td>
+                <td style=" background-color: #F5F5F5; border-bottom: 5px solid #FFF; white-space: nowrap;">
+                    <?php echo truncate_clean($class->getUnit()->getName(), 35); ?>
+                </td>
+            </tr>
+        <?php } ?>
+          
+    <?php } ?>
+
+    </table>   
+<?php } ?>
+<br />

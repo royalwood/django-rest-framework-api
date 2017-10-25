@@ -1,0 +1,21 @@
+<?php
+// TODO put the em() function in general_helpers
+$this->load->helper("notification_event_helper.php");
+$user = em()->getRepository('models\Users')->find($notification['user_from_id']);
+$href = base_url() . 'feed_posts/view/' . $notification['entity_id'];
+
+$entity_extra = explode("=", $notification['entity_extra']);
+if($entity_extra[0] == 'unit'){
+  $unit = em()->getRepository('models\Unit')->find($entity_extra[1]);
+  $glink = base_url()."feed_posts/unit/".$entity_extra[1];
+  $gname = $unit->getName();
+}else if($entity_extra[0] == 'study_group'){
+  $unit = em()->getRepository('models\Study_group')->find($entity_extra[1]);
+  $glink = base_url()."feed_posts/study_group/".$entity_extra[1];
+  $gname = $unit->getName();
+}
+?>
+<a href="<?=base_url()?>user/profile/<?=$notification['user_from_id']?>"><?php echo $user->getUsername();?></a> has asked for your help with <?php echo get_possessive_form($user->getId());?> question in 
+<a href="<?=$glink?>"><?php echo $gname;?></a>
+<br><br>
+<a href="<?=$glink?>">Answer now</a>

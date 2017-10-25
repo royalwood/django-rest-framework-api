@@ -1,0 +1,7 @@
+- model: marketplace.item
+  pk: 1
+  fields:
+    user: 6 # Friend
+    title: Bicycle
+    price: 10.00
+    category: 1

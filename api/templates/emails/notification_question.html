@@ -1,0 +1,5 @@
+<? 
+		$href = base_url().'question/view/'.$notification->get_entity_id().prepare_que_str_mobile($notification);
+?>
+
+	<p><?= "A " . $entity->getType() . " has been posted in <b>".$entity->getUnit()->getCode().'</b> - "'. anchor($href, ucfirst($entity->getQuestion())).'"'?></p>

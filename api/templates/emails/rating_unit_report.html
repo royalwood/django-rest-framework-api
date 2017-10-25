@@ -1,0 +1,98 @@
+	<p>The following UNIT rating has been repoted in this post.</p>
+	
+	<p>Userid: <?=$rating->getUser_id();?></p>
+	
+	<hr>
+	<h3>Copy of Rating:</h3>
+	
+		<? $unit = $rating->getUnit(); ?>
+		<? $colour = 'blue'; ?>
+		
+		<div class="therating">
+		
+			<table width="100%">
+				<tr>
+					<td colspan="3" align=left>
+							<div class="col1"> 
+								<div class="rating_pad">
+									<div class="rdtop">
+										<div class=""><b><?=$unit->getCode();?></b> - <?=$unit->getName();?> (<?=percentage_rating($unit->getOverall_rating());?>) - <?=$unit->getFaculty()->getName(); ?> - <?=$unit->getFaculty()->getName(); ?></div>
+										<div class="value"></div>
+										<div class="clear"></div>
+									</div>
+									
+									<table>
+									<tr>
+										<td width="90"><?=$this->_unit_r1?></td>
+										<td><span class="r_style"><?=number_format($unit->getRating1(),1);?></span></td>
+										<td width="50"></td>
+										<td width="90"><?=$this->_unit_r2?></td>
+										<td><span class="r_style"><?=number_format($unit->getRating2(),1);?></span></td>
+									</tr>
+									<tr>
+										<td><?=$this->_unit_r3?><?=nbs(2)?></td>
+										<td><span class="r_style"><?=number_format($unit->getRating3(),1);?></span></td>
+										<td></td>
+										<td><?=$this->_unit_r4?><?=nbs(2)?></td>
+										<td><span class="r_style"><?=number_format($unit->getRating4(),1);?></span></td>
+									</tr>					
+									</table>
+									
+								</div>
+							</div> 								
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3" align=left>
+					<b>Reported Rating:</b>
+					</td>
+				</tr>				
+				<tr>
+					<td width="100" valign="top">
+						<div class="s_style"><?=$this->_unit_r1?><?=br(1)?></div>
+						<div class="s_style"><?=$this->_unit_r2?><?=br(1)?></div>
+						<div class="s_style"><?=$this->_unit_r3?><?=br(1)?></div>
+						<div class="s_style"><?=$this->_unit_r4?><?=br(1)?></div>
+					</td>
+					<td valign="top">
+						<?=img(cdn_url('images/stars/'.$colour.'/'.$rating->getRating1().'.png'))?><?=br(1)?>
+						<?=img(cdn_url('images/stars/'.$colour.'/'.$rating->getRating2().'.png'))?><?=br(1)?>
+						<?=img(cdn_url('images/stars/'.$colour.'/'.$rating->getRating3().'.png'))?><?=br(1)?>
+						<?=img(cdn_url('images/stars/'.$colour.'/'.$rating->getRating4().'.png'))?><?=br(1)?>
+					</td>
+					<td width="440"  valign="top">
+						<div class="ratings_comments">
+							<?=$rating->getComment()?>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3" align=right>
+						<?=how_long_ago($rating->getDate_modified()->format(MYSQL_TIME))?></em> - 
+						<a href="<?=base_url()?>rating/report_unit_rating/<?=$rating->getId()?>" onclick="return confirm('Are you sure you want to report this rating?');">Report</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+	
+
+	<?if($user != NULL):?>
+		<hr>
+		<h3>User Details (poster):</h3>
+		<p>Userid: <?=$user->getId()?></p>
+		<p>User's Name: <?=$user->getUsername()?></p>
+		<p>User's Email: <?=$user->getEmail()?></p>
+	<?endif;?>
+
+
+	<hr>
+	<h3>Rating Details:</h3>
+	<p>Post ID: <?=$rating->getId()?></p>
+	<p>Date Created: <?=$rating->getDate_Created()->format(MYSQL_TIME)?></p>
+	
+	<hr>
+	<h3>Reporter Details (poster):</h3>
+	<p>Userid: <?=$reporter->getId()?></p>
+	<p>User's Name: <?=$reporter->getUsername()?></p>
+	<p>User's Email: <?=$reporter->getEmail()?></p>

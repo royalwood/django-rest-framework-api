@@ -1,0 +1,96 @@
+<style>
+body { padding: 0; }
+@media only screen and (max-width: 600px) {
+.content-wrap { width: 98% !important; }
+.header{background:#0e263b !important;-webkit-border-radius:5px 5px 0 0 ; -moz-border-radius:5px 5px 0 0 ; border-radius:5px 5px 0 0 ;}
+.eddi-logo{width:50% !important}
+.eddi-logo img{width:auto;}
+.top-text{width:35%;}
+.ucroo-logo img{margin-top:5px;}
+
+}
+
+@media only screen and (max-width: 480px) {
+.content-wrap { width: 98% !important; }
+.eddi-logo{width:45% !important;padding:10px 20px 10px 10px !important;}
+.eddi-logo img{width:60%;}
+.text{font-size:18px !important;padding:20px 10px !important;width:65% !important;}
+.ucroo-logo{width:31% !important;padding:0 10px 0 0 !important;}
+.ucroo-logo img{width:98%;margin:5px 0 0 0;}
+.fb-btn{width:48%;text-align:left;}
+.fb-btn img{width:100%;}
+.twitter-btn{width:48%;text-align:right;}
+.twitter-btn img{width:100%;}
+.content{padding:15px !important;font-size:16px !important}
+.top-text{width:45% !important;padding:20px 20px 20px 0 !important;}
+}
+
+@media only screen and (max-width: 360px) {
+.content-wrap { width: 98% !important; }
+.eddi-logo{width:32% !important;}
+.eddi-logo img{width:100%;}
+.top-text{font-size:16px !important;width: 51% !important;padding: 20px 10px 20px 0 !important;}
+}
+</style>
+
+<table class="content-wrap" style="margin:0 auto;" border="0" cellpadding="0" cellspacing="0" width="598">
+    <tr>
+        <td colspan="2" style="background:#0e263b;-webkit-border-radius:5px 5px 0 0 ; -moz-border-radius:5px 5px 0 0 ; border-radius:5px 5px 0 0 ;" class="header">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+        <td style="padding:20px 0 20px 20px;width:340px" class="eddi-logo"><a href="https://ucroo.com.au" target="_blank"><img src="http://www.ucroo.com.au/assets/images/homepage-logo.png" alt="UCROO" border="0"/></a></td>
+        <td valign="top" class="top-text" style="color:#8b939c;font-size:18px;font-family: Helvetica,Arial,sans-serif;padding:35px 40px 30px 0;">The University Network<br>
+            <a href="https://www.ucroo.com.au" target="_blank" style="color:#4f97e8;text-decoration:none;">ucroo.com.au</a>
+        </td>
+        </tr>
+        <tr>
+        <td colspan="2">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+        <td class="text" style="background:#13222d;color:#fff;font-size:24px;font-family: Helvetica,Arial,sans-serif;padding:20px;width:100%;">
+            <?=$title?>
+        </td>
+        </tr>
+        </table>
+        </td>
+        
+        </tr>
+        </table>
+    </tr>
+    
+    <tr>
+    <td colspan="2"  style="padding:40px 30px; -webkit-border-radius:0 0 5px 5px; -moz-border-radius: 0 0 5px 5px; border-radius:0 0 5px 5px;background:#ffffff;font-family: Helvetica,Arial,sans-serif;font-size:18px;color:#000;border:1px solid #ebebeb;border-top:0;" class="content">
+        <?=$message?>
+        <?php if(!strstr($message, 'Kind regards')){?>
+        <br/><br/>
+        See you around campus,<br/><br/>
+        The UCROO Team
+        <?php }?>
+    </td>
+    </tr> 
+    
+    <tr>
+    <td width="223" style="padding:20px 0;" class="fb-btn"><a href="https://www.facebook.com/ucroo" target="_blank"><img src="<?=base_url()?>assets/images/fb-button.png" alt="Find us on Facebook" border="0"/></a></td>
+    <td width="375" style="padding:20px 0;" class="twitter-btn"><a href="https://twitter.com/UCROO" target="_blank"><img src="<?=base_url()?>assets/images/twitter-btn.png" alt="Find us on Twitter" border="0"/></a></td>
+    </tr>
+    <tr>
+    <td colspan="2" style="font-size:13px;color:#c7c7c7;font-family:Helvetica, Arial, sans-serif">You are receiving this email because you are a UCROO user.<br> 
+Copyright &copy; <?=date("Y")?> UCROO. All rights reserved.</td>
+    </tr>
+    
+    <tr><td>&nbsp;</td></tr>
+    <!-- Unsubscribe Link -->
+    <?php if($unsubscribe_link!=''){?>
+        <tr>
+        <td colspan="2" style="font-size:12px;color:#999;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+        <a style="color:#538dc2" href="<?= $unsubscribe_link;?>" target="_blank">Click here</a> to Unsubscribe
+        </td>
+        </tr>
+    <?php } ?>
+
+    <tr>
+    <td colspan="2" style="font-size:14px;color:#9e9e9e;font-family:Helvetica, Arial, sans-serif;padding:20px 0;">
+        <a style="color: #538DC2" href="<?=base_url()?>account/notifications<?php echo prepare_que_str_mobile(array('AccountSetting',0));?>" target="_blank">Turn on/off email notifications</a>
+    </td>
+    </tr>
+</table>

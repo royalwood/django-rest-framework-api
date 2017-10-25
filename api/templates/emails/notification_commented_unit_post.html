@@ -1,0 +1,74 @@
+<? 
+
+/*
+ * Pretty much identical to views in the views/notification folder so go have a look ther
+ * 
+ */
+
+		// TODO put the em() function in general_helpers
+	$this->load->helper("notification_event_helper.php");
+	$ent_type = $notification->get_entity_type();
+	$ent_id = $notification->get_entity_id();
+	$unit_post = em()->getRepository("models\\$ent_type")->find($notification->get_entity_id());
+	// FIXME post shuold have a getUser method	
+	if($unit_post)	{
+		$post_owner = em()->getRepository('models\Users')->find($unit_post->getUser_id())->getId();
+		$post_type = 'ANSWER';
+		$question = '';
+		if ($ent_type == 'Unit_question_answer')
+		{
+			$question_entity = $unit_post->getUnit_question();
+			$question = $unit_post->getAnswer();
+			$unit = $question_entity->getUnit();
+			$ent_id = $unit_post->getUnit_question_id();
+		}
+		elseif ($ent_type == 'Unit_question')
+		{
+			$question = $unit_post->getQuestion();
+			$unit = $unit_post->getUnit();
+			$post_type = strtoupper($unit_post->getType());
+		}
+		
+		$words = explode(' ', $question);
+		$description = '';
+		if(sizeof($words) > 0)
+			$description .= $words[0];
+		if(sizeof($words) > 1)
+			$description .= ' '.$words[1];
+		if(sizeof($words) > 2)	
+			$description .= ' '.$words[2];
+		if(sizeof($words) > 3)
+			$description .= ' ...';
+		$description .= '';
+		
+	}
+	else	{
+		$post_owner = '';
+		$post_type = 'post';
+		$description = '';
+	}
+	
+	$href = base_url().'question/view/'.$ent_id.prepare_que_str_mobile($notification);
+	$post_link = anchor($href, $post_type);
+	
+	if($notification->get_user_to()->getId() == $post_owner) {
+		$message = " commented on your" ;
+		$postscript = "";
+	} else{
+		$message = " also commented on a";
+		$postscript = "that you commented on";
+	}
+	
+	// $unit_name = $unit->getCodeName();
+	// $unit_id = $unit->getId();
+	// $unit_link = anchor("question/unit/$unit_id", $unit_name);
+	// $unit_message = "in $unit_link";
+?>
+	<p>
+		<span>
+			<?= "A student has $message $post_link $postscript"?>
+		</span>
+		<span class="post-description"> - "<?=clickable_link_shorten($description)?>"</span>
+	</p>
+
+	<p><?=anchor($href, "View the post and comments")?></p>

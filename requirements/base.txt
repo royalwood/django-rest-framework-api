@@ -1,0 +1,15 @@
+django-activity-stream==0.6.3
+django-auth-adfs==0.1.1
+django-axes==2.3.2
+django-cors-headers==2.0.0
+django-filter==1.0.1
+django-import-export==0.5.1
+django-model-utils==2.6.1
+django-oauth-toolkit==0.11.0
+django==1.10.5
+djangorestframework==3.5.3
+html2text==2016.9.19
+jsonfield==1.0.3
+oauthlib==2.0.1
+psycopg2==2.6.2
+twilio==5.7.0

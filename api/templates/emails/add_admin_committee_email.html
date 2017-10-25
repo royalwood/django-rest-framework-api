@@ -1,0 +1,26 @@
+<p><strong>What else can you do on UCROO?<strong></p>
+
+<p><strong>Apart from being the one-stop-shop for all things <?=$club->getShort_name()?> related, you can also:</strong></p>
+
+<ul>
+<li>Share timetables with peers so you know who you've got class with and when they're free</li>
+<?php 
+/*
+ * #3640 CSU - Removing the text ' and buy tickets to their events' - Kaushal
+ */
+if($club->getUni()->getId() != 6){
+?>
+<li>Join student clubs and buy tickets to their events</li>
+<?php } ?>
+<li>Share, laugh and create with peers from across the university, as well as your school and year level</li>
+<li>Chat with relevant peers, classmates, academics and services staff when they're online</li>
+<li>Connect with employers related to your degree</li>
+<li>Buy & sell everything from textbooks to bikes in the student marketplace</li>
+<li>Earn points to save money on club event tickets and stuff you buy in the marketplace</li>
+</ul>
+
+<p>You can finish creating your UCROO account below:</p>
+
+<p><a href="<?=  base_url()?>auth/aaf" class="btn btn-super_large btn-dark_blue btn-serif">Create Account</a></p>
+
+<p>We look forward to seeing you on UCROO soon!</p>

@@ -1,0 +1,10 @@
+[run]
+omit =
+    *.virtualenvs*
+    *django-rest-framework*
+    *migrations*
+    *test*
+    *__init__.py
+    *admin.py
+    *urls.py
+    manage.py

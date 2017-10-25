@@ -1,0 +1,18 @@
+<?php 
+  $event = repo($notification->get_entity_type())->findOneBy(array('id'=>$notification->get_entity_id()));
+  $service = $event->getService();
+?>
+<?php 
+$iconClass = 'post-icon';
+$detailsClass = 'post-details';
+if (isset($is_menu)) { 
+  $iconClass = 'msg-icon';
+  $detailsClass = 'msg-details';
+}
+?>
+<span>
+  <?php echo anchor(base_url() .'service_pages/event_view/'.$event->getId().prepare_que_str_mobile(array('Service_event', $event->getId())), $event->getTitle());?> 
+  <?php echo anchor(base_url() .'service_pages/feed/'.$service->getId().prepare_que_str_mobile(array('ServicePageInfo', $service->getId())), ' (' . $service->getName() . ')');?>:
+  Details changed
+</span>
+<br><br>

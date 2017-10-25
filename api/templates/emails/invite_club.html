@@ -1,0 +1,58 @@
+	<h2 style="font-size: 14px; line-height: 1.2em;">You have been invited to join UCROO</h2>
+	<p>
+		<?=$user->getMeta()->getName()?> has requested that your club <?=$club_suggestion->getName()?> joins UCROO. In order to do that please click <a href="<?=base_url()?>club_setup">here</a>.
+	</p>
+  
+<p>Having a Club Page on UCROO means:</p>
+
+<?php 
+/*
+ * #3640 CSU - Removing the text ' and buy tickets to their events' - Kaushal
+ */
+if($club_suggestion->getUni()->getId() != 6){
+?>	
+<ul>
+	<li>Students can join the <?=$club_suggestion->getName()?> any time, all year-round </li>
+	<li>Membership renewal each year is quick and easy</li>
+	<li>Students can buy tickets to <?=$club_suggestion->getName()?> events online</li>
+	<li>Communication with members is improved</li>
+	<li>Time and money is saved on membership cards and bulk SMS</li>
+	<li>Your administration and reporting requirements are taken care of</li>
+	<li>Your position just became a whole lot easier!</li>
+</ul>
+
+<p>Being the Club Page creator allows you to:</p>
+	
+<ul>
+	<li>Edit the <?=$club_suggestion->getName()?> Club Page</li>
+	<li>Create and manage ticketed events</li>
+	<li>Download aggregated revenue reports</li>
+	<li>Manage the <?=$club_suggestion->getName()?>'s bank account details</li>
+</ul>
+<?php } else { ?>
+<ul>
+	<li>Communication with members is improved</li>
+	<li>Time and money is saved on bulk SMS</li>
+	<li>Your administration and reporting requirements are taken care of</li>
+	<li>Your position just became a whole lot easier!</li>
+</ul>
+
+<p>Being the Club Page creator allows you to:</p>
+	
+<ul>
+	<li>Edit the <?=$club_suggestion->getName()?> Club Page</li>
+	<li>Download aggregated revenue reports</li>
+	<li>Manage the <?=$club_suggestion->getName()?>'s bank account details</li>
+</ul>
+<?php } ?>
+
+<p>To make sure everything runs smoothly, we have created a dedicated support section for Club Pages. If you want a quick answer to your questions then visit: <a href="http://support.ucroo.com.au/knowledgebase/creating-events-and-selling-tickets/">support.ucroo.com.au/clubs</a> </p>
+
+<p>If you'd rather speak to someone, we're here to help and love to chat! You can contact our Clubs & Societies manager at any time (literally):</p>
+
+<p>James McCubbin<br />
+C&S Manager<br />
+0422 224 788<br />
+<a href="mailto:james.mccubbin@ucroo.com">james.mccubbin@ucroo.com</a></p>
+
+<p>Thanks again,</p>
